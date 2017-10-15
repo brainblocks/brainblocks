@@ -31,6 +31,12 @@ export default function configKarma(config : Object) {
                 pattern:  'test/test.js',
                 included: true,
                 served:   true
+            },
+
+            {
+                pattern:  'test/**/*',
+                included: false,
+                served:   true
             }
         ],
 

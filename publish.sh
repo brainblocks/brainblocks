@@ -2,6 +2,9 @@
 
 set -e;
 
+rm dist/*;
+git checkout dist/;
+
 if ! git diff-files --quiet; then
     echo "Can not publish with unstaged uncommited changes";
     exit 1;
@@ -17,10 +20,10 @@ npm install
 
 npm run build;
 
-git add dist;
+git add dist --all;
 git commit -m "Dist" || echo "Nothing to distribute";
 
-npm version patch
+npm version ${1-patch};
 
 git push;
 git push --tags;

@@ -44,7 +44,13 @@ module.exports = {
         'Promise': false,
         'performance': true,
         'assert': true,
-        '__TEST__': true
+        '__TEST__': true,
+        '__MIN__': true,
+        '__IE_POPUP_SUPPORT__': true,
+        '__CHILD_WINDOW_ENFORCE_LOG_LEVEL__': true,
+        '__SEND_POPUP_LOGS_TO_OPENER__': true,
+        '__POPUP_SUPPORT__': true,
+        '__DEFAULT_CONTEXT__': true
     },
 
     'rules': {
@@ -159,7 +165,7 @@ module.exports = {
         'no-undef-init': 'error',
         'no-undef': 'error',
         'no-undefined': 'off',
-        'no-unused-vars': 'error',
+        'no-unused-vars': [ 'error', { 'varsIgnorePattern': 'jsxDom' } ],
         'no-use-before-define': 'error',
 
         // node.js

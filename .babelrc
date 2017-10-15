@@ -9,7 +9,8 @@
                     "safari": 5,
                     "opera": 23
                 },
-                "modules": false
+                "modules": false,
+                "loose":   true
             }
         ]
     ],
@@ -18,15 +19,17 @@
         [ "transform-flow-strip-types", { "loose": true } ],
         [ "transform-object-rest-spread", { "loose": true } ],
         [ "syntax-object-rest-spread", { "loose": true } ],
+        [ "transform-class-properties", { "loose": true } ],
         [ "transform-es3-property-literals", { "loose": true } ],
         [ "transform-es3-member-expression-literals", { "loose": true } ],
-        [ "transform-es2015-for-of", { "loose": true } ]
+        [ "transform-es2015-for-of", { "loose": true } ],
+        [ "transform-decorators-legacy", { "loose": true } ],
+        [ "babel-plugin-transform-react-jsx", { "pragma": "jsxDom" } ]
     ],
 
     "env": {
         "test": {
             "plugins": [
-                [ "flow-runtime", { "assert": true, "annotate": true } ],
                 [ "istanbul", { "only": "./src" } ]
             ]
         }
