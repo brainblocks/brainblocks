@@ -18,6 +18,7 @@ const DEFAULT_VARS = {
     __CHILD_WINDOW_ENFORCE_LOG_LEVEL__: false,
     __SEND_POPUP_LOGS_TO_OPENER__:      false,
     __POPUP_SUPPORT__:                  false,
+    __ALLOW_POSTMESSAGE_POPUP__:        true,
     __DEFAULT_CONTEXT__:                'iframe'
 };
 
