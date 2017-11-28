@@ -1,6 +1,6 @@
 {
   "name": "xcomponent-demo",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Javascript module template.",
   "main": "index.js",
   "module": "dist/module/index.js",
