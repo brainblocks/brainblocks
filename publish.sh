@@ -2,7 +2,7 @@
 
 set -e;
 
-rm dist/*;
+rm -r dist/*;
 git checkout dist/;
 
 if ! git diff-files --quiet; then
