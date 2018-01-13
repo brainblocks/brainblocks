@@ -1,5 +1,4 @@
-brainblocks
------------
+![logo](./img/brainblocks-logo.png)
 
 https://brainblocks.io
 
