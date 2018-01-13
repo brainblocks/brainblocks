@@ -8,7 +8,7 @@ Simple raiblocks checkout
 ```
 <div id="raiblocks-button"></div>
 
-<script src="https://brainblocks.io/static/js/brainblocks.js"></script>
+<script src="https://brainblocks.io/brainblocks.js"></script>
 
 <script>
     // Render the RaiBlocks button
@@ -18,16 +18,15 @@ Simple raiblocks checkout
         // Pass in payment options
 
         payment: {
-            destination: 'xrb_164xaa1o...',
-            amount: 1000,
-            currency: 'rai'
+            destination: 'xrb_164xaa1ojy6qmq9e8t94mz8izr4mkf1sojb6xrmstru5jsif48g5kegcqg7y',
+            currency:    'rai',
+            amount:      1000
         },
 
         // Handle successful payments
 
         onPayment: function(data) {
-            console.log('Payment successful!',
-                data.block, data.destination, data.amount);
+            console.log('Payment successful!', data.token);
         }
 
     }, '#raiblocks-button');
@@ -35,11 +34,11 @@ Simple raiblocks checkout
 ```
 
 ```
-> curl https://brainblocks.io/api/block/D49AFC5...
+> curl https://brainblocks.io/api/session/<token>/verify
 
 {
-    "block": "D49AFC55E64A02EB22C9EFA30972E1CABBF5D0F9801CBF5752291A4FA84AB847",
-    "amount": 1000,
-    "destination": "xrb_164xaa1ojy6qmq9e8t94mz8izr4mkf1sojb6xrmstru5jsif48g5kegcqg7y"
+    "token":       "ZXlKaGJHY...",
+    "destination": "xrb_164xa...",
+    "received":    1000
 }
 ```
