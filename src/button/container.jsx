@@ -1,4 +1,5 @@
 /* @flow */
+/* @jsx jsxDom */
 
 import { type RenderOptionsType } from 'xcomponent/src/component/parent';
 

@@ -3,8 +3,10 @@
 
 import { jsxDom } from 'xcomponent/src/lib';
 
-export function buttonTemplate({ props }) : HTMLElement {
-    let mrai = (props.payment.amount / 1000000).toFixed(3);
+export function buttonTemplate({ props } : { props : Object }) : HTMLElement {
+    let mrai = (props.payment.amount >= 1000)
+        ? (props.payment.amount / 1000000).toFixed(3)
+        : (props.payment.amount / 1000000).toFixed(6);
 
     return (
         <div class="brainblocks-button-container">
