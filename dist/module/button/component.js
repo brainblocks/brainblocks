@@ -4,6 +4,7 @@
 import { create } from 'xcomponent/src';
 
 import { buttonTemplate } from './template';
+import { containerTemplate } from './container';
 
 export var Button = create({
 
@@ -13,27 +14,66 @@ export var Button = create({
 
     url: {
         test: '/base/test/windows/button/index.htm',
+        local: 'http://localhost:8000/button',
         production: 'https://brainblocks.io/button'
     },
 
     domain: {
         test: 'mock://www.my-site.com',
+        local: 'http://localhost:8000',
         production: 'https://brainblocks.io'
+    },
+
+    dimensions: {
+        width: '300px',
+        height: '50px'
     },
 
     props: {
 
-        account: {
+        logLevel: {
             type: 'string',
-            requited: true
+            value: 'warn',
+            required: false
         },
 
-        onClick: {
-            type: 'function',
-            required: true
+        payment: {
+            type: 'object',
+            required: true,
+            validate: function validate(payment) {
+                if (!payment.destination) {
+                    throw new Error('Expected payment.destination');
+                }
+                if (!payment.destination.match(/^xrb_[a-z0-9]{60}$/)) {
+                    throw new Error('Invalid raiblocks address: ' + payment.destination);
+                }
+
+                if (!payment.currency) {
+                    throw new Error('Expected payment.currency');
+                }
+                if (payment.currency !== 'rai' /* && payment.currency !== 'usd' */) {
+                        throw new Error('Expected payment.currency to be \'rai\', got ' + payment.currency);
+                    }
+
+                if (!payment.amount) {
+                    throw new Error('Expected payment.amount');
+                }
+                if (typeof payment.amount !== 'number') {
+                    throw new Error('Expected payment.amount to be a number, got ' + payment.amount);
+                }
+                if (payment.amount <= 0) {
+                    throw new Error('Expected payment.amount to be at least 1, got ' + payment.amount);
+                }
+                //if (payment.currency === 'usd' && payment.amount > 10000) {
+                //    throw new Error(`Expected payment.amount to be less then $100.00 USD, got ${ payment.amount }`);
+                //}
+                if (payment.currency === 'rai' && payment.amount > 5000000) {
+                    throw new Error('Expected payment.amount to be less then 5000000 RAI, got ' + payment.amount);
+                }
+            }
         },
 
-        onComplete: {
+        onPayment: {
             type: 'function',
             required: true
         }
@@ -47,8 +87,29 @@ export var Button = create({
     },
 
     prerenderTemplate: function prerenderTemplate(_ref) {
-        var jsxDom = _ref.jsxDom;
+        var jsxDom = _ref.jsxDom,
+            props = _ref.props;
 
-        return buttonTemplate({ jsxDom: jsxDom });
-    }
+        return jsxDom(
+            'html',
+            null,
+            jsxDom(
+                'head',
+                null,
+                jsxDom(
+                    'style',
+                    null,
+                    '\n                            html, body {\n                                border: 0;\n                                padding: 0;\n                                margin: 0;\n                            }\n                        '
+                )
+            ),
+            jsxDom(
+                'body',
+                null,
+                buttonTemplate({ props: props })
+            )
+        );
+    },
+
+
+    containerTemplate: containerTemplate
 });

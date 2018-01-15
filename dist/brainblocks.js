@@ -3574,6 +3574,7 @@
                     _this.addProp(options, "containerTemplate", __WEBPACK_IMPORTED_MODULE_11__templates__.a);
                     _this.addProp(options, "prerenderTemplate", __WEBPACK_IMPORTED_MODULE_11__templates__.b);
                     _this.addProp(options, "validate");
+                    _this.addProp(options, "unsafeRenderTo", !1);
                     Component.components[_this.tag] = _this;
                     _this.registerDrivers();
                     _this.registerChild();
@@ -4610,7 +4611,7 @@
                     };
                 };
                 ParentComponent.prototype.buildChildWindowName = function() {
-                    var _ref6 = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {}, _ref6$renderTo = _ref6.renderTo, renderTo = void 0 === _ref6$renderTo ? window : _ref6$renderTo, sameDomain = Object(__WEBPACK_IMPORTED_MODULE_2_cross_domain_utils_src__.p)(renderTo), uid = Object(__WEBPACK_IMPORTED_MODULE_6__lib__.Y)(), tag = this.component.tag, sProps = Object(__WEBPACK_IMPORTED_MODULE_6__lib__.P)(this.getPropsForChild()), componentParent = this.getComponentParentRef(renderTo), renderParent = this.getRenderParentRef(renderTo), secureProps = !sameDomain, props = secureProps ? {
+                    var _ref6 = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {}, _ref6$renderTo = _ref6.renderTo, renderTo = void 0 === _ref6$renderTo ? window : _ref6$renderTo, sameDomain = Object(__WEBPACK_IMPORTED_MODULE_2_cross_domain_utils_src__.p)(renderTo), uid = Object(__WEBPACK_IMPORTED_MODULE_6__lib__.Y)(), tag = this.component.tag, sProps = Object(__WEBPACK_IMPORTED_MODULE_6__lib__.P)(this.getPropsForChild()), componentParent = this.getComponentParentRef(renderTo), renderParent = this.getRenderParentRef(renderTo), secureProps = !sameDomain && !this.component.unsafeRenderTo, props = secureProps ? {
                         type: __WEBPACK_IMPORTED_MODULE_7__constants__.INITIAL_PROPS.UID,
                         uid: uid
                     } : {
@@ -7415,6 +7416,11 @@
                     height: "50px"
                 },
                 props: {
+                    logLevel: {
+                        type: "string",
+                        value: "warn",
+                        required: !1
+                    },
                     payment: {
                         type: "object",
                         required: !0,
@@ -7474,7 +7480,7 @@
         "./src/button/template.jsx": function(module, __webpack_exports__, __webpack_require__) {
             "use strict";
             function buttonTemplate(_ref) {
-                var props = _ref.props, mrai = (props.payment.amount / 1e6).toFixed(3);
+                var props = _ref.props, mrai = props.payment.amount >= 1e3 ? (props.payment.amount / 1e6).toFixed(3) : (props.payment.amount / 1e6).toFixed(6);
                 return Object(__WEBPACK_IMPORTED_MODULE_0_xcomponent_src_lib__.F)("div", {
                     class: "brainblocks-button-container"
                 }, Object(__WEBPACK_IMPORTED_MODULE_0_xcomponent_src_lib__.F)("style", null, "\n                    .brainblocks-button {\n                        display: inline-block;\n                        width: 300px;\n                        height: 50px;\n                        background-color: #eee;\n                        border-radius: 5px;\n                        font-family: Helvetica, Arial, sans-serif;\n                        line-height: 50px;\n                        color: #1A3238;\n                        cursor: pointer;\n                        font-size: 14px;\n                        text-align: center;\n                    }\n\n                    .brainblocks-button * {\n                        vertical-align: middle;\n                    }\n\n                    .brainblocks-button .brainblocks-raiblocks-logo {\n                        height: 30px;\n                        margin-left: 5px;\n                        border-left: 1px solid #ccc;\n                        padding-left: 5px;\n                    }\n                "), Object(__WEBPACK_IMPORTED_MODULE_0_xcomponent_src_lib__.F)("div", {
@@ -7500,6 +7506,14 @@
             __webpack_require__.d(__webpack_exports__, "buttonTemplate", function() {
                 return __WEBPACK_IMPORTED_MODULE_0__button__.b;
             });
+            __webpack_require__("./src/logs.js");
+        },
+        "./src/logs.js": function(module, __webpack_exports__, __webpack_require__) {
+            "use strict";
+            var __WEBPACK_IMPORTED_MODULE_0_beaver_logger_client__ = __webpack_require__("./node_modules/beaver-logger/client/index.js"), __WEBPACK_IMPORTED_MODULE_1_post_robot_src__ = __webpack_require__("./node_modules/post-robot/src/index.js");
+            __WEBPACK_IMPORTED_MODULE_0_beaver_logger_client__.a.logLevel = "warn";
+            __WEBPACK_IMPORTED_MODULE_1_post_robot_src__.CONFIG.LOG_LEVEL = "warn";
+            window.LOG_LEVEL = "warn";
         }
     });
 });
