@@ -31,6 +31,12 @@ export let Button = create({
 
     props: {
 
+        logLevel: {
+            type: 'string',
+            value: 'warn',
+            required: false
+        },
+
         payment: {
             type:     'object',
             required: true,

@@ -50,7 +50,8 @@ module.exports = {
         '__CHILD_WINDOW_ENFORCE_LOG_LEVEL__': true,
         '__SEND_POPUP_LOGS_TO_OPENER__': true,
         '__POPUP_SUPPORT__': true,
-        '__DEFAULT_CONTEXT__': true
+        '__DEFAULT_CONTEXT__': true,
+        '__DEFAULT_LOG_LEVEL__': true
     },
 
     'rules': {
