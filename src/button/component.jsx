@@ -6,6 +6,8 @@ import { create } from 'xcomponent/src';
 import { buttonTemplate } from './template';
 import { containerTemplate } from './container';
 
+import { SUPPORTED_CURRENCIES } from '../config';
+
 export let Button = create({
 
     tag: 'brainblocks-button',
@@ -51,31 +53,33 @@ export let Button = create({
                 if (!payment.currency) {
                     throw new Error(`Expected payment.currency`);
                 }
-                if (payment.currency !== 'rai' /* && payment.currency !== 'usd' */) {
-                    throw new Error(`Expected payment.currency to be 'rai', got ${ payment.currency }`);
+                if (payment.currency !== 'rai' && SUPPORTED_CURRENCIES.indexOf(payment.currency) === -1) {
+                    throw new Error(`Expected payment.currency to be rai or ${ SUPPORTED_CURRENCIES.join(', ') }, got ${ payment.currency }`);
                 }
 
                 if (!payment.amount) {
                     throw new Error(`Expected payment.amount`);
                 }
-                if (typeof payment.amount !== 'number') {
-                    throw new Error(`Expected payment.amount to be a number, got ${ payment.amount }`);
+                if (!payment.amount.toString().match(/^\d+(\.\d+)?$/)) {
+                    throw new Error(`Expected payment.mount to be a number, got ${ payment.amount }`);
                 }
-                if (payment.amount <= 0) {
-                    throw new Error(`Expected payment.amount to be at least 1, got ${ payment.amount }`);
-                }
-                //if (payment.currency === 'usd' && payment.amount > 10000) {
-                //    throw new Error(`Expected payment.amount to be less then $100.00 USD, got ${ payment.amount }`);
-                //}
-                if (payment.currency === 'rai' && payment.amount > 5000000) {
-                    throw new Error(`Expected payment.amount to be less then 5000000 RAI, got ${ payment.amount }`);
-                }
+            },
+            decorate(payment) {
+                return {
+                    ...payment,
+                    amount: payment.amount.toString()
+                };
             }
         },
 
         onPayment: {
             type:     'function',
             required: true
+        },
+
+        onClick: {
+            type:     'function',
+            required: false
         }
     },
 
