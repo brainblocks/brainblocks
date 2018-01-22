@@ -39,6 +39,14 @@ export let Button = create({
             required: false
         },
 
+        style: {
+            type:     'object',
+            required: false,
+            def() {
+                return {};
+            }
+        },
+
         payment: {
             type:     'object',
             required: true,

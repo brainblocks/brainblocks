@@ -1,21 +1,22 @@
 /* @flow */
 /* @jsx jsxDom */
 
-import { type RenderOptionsType } from 'xcomponent/src/component/parent';
-
-export function containerTemplate({ id, tag, context, CLASS, outlet, jsxDom, dimensions : { width, height } } : RenderOptionsType) : HTMLElement {
+export function containerTemplate({ id, tag, context, CLASS, outlet, jsxDom, dimensions : { width, height }, props } : Object) : HTMLElement {
 
     return (
         <div id={ id } class={ `${ CLASS.XCOMPONENT } ${ CLASS.XCOMPONENT }-tag-${ tag } ${ CLASS.XCOMPONENT }-context-${ context }` }>
             <style>
                 {`
                     #${ id }, #${ id } > .${ CLASS.OUTLET } {
-                        width: ${ width };
-                        height: ${ height };
                         transition: height 0.5s ease-in-out;
                     }
 
                     #${ id } > .${ CLASS.OUTLET } {
+                        display: inline-block;
+                        max-width: 500px;
+                        min-width: 150px;
+                        width: ${ props.style.size === 'responsive' ? '100%' : width };
+                        height: ${ height };
                         display: inline-block;
                         position: relative;
                         transition: height 0.5s ease-in-out;
