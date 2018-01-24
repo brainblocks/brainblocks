@@ -3,7 +3,7 @@
   "version": "1.0.4",
   "description": "Javascript module template.",
   "main": "index.js",
-  "module": "dist/module/index.js",
+  "module": "dist/brainblocks.js",
   "scripts": {
     "lint": "eslint src/ test/ *.js",
     "flow-typed": "flow-typed install",
