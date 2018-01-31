@@ -2,7 +2,7 @@
   "name": "brainblocks",
   "version": "1.0.5",
   "description": "Javascript module template.",
-  "main": "index.js",
+  "main": "dist/brainblocks.js",
   "module": "dist/brainblocks.js",
   "scripts": {
     "lint": "eslint src/ test/ *.js",
