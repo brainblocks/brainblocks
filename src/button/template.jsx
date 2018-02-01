@@ -11,9 +11,14 @@ export function buttonTemplate({ props } : { props : Object }) : HTMLElement {
     if (props.payment.currency === 'rai') {
         currency = '';
 
-        amount = (props.payment.amount >= 1000)
-            ? (props.payment.amount / 1000000).toFixed(3)
-            : (props.payment.amount / 1000000).toFixed(6);
+        function hasRai(num) {
+            num = parseInt(num) / 1000;
+            return num > Math.floor(num)
+        }
+
+        amount = hasRai(props.payment.amount)
+            ? (parseInt(props.payment.amount) / 1000000).toFixed(6)
+            : (parseInt(props.payment.amount) / 1000000).toFixed(3);
     }
     return (
         <div class="brainblocks-button-container">
