@@ -11,9 +11,14 @@ export function buttonTemplate(_ref) {
     var amount = '';
 
     if (props.payment.currency === 'rai') {
+        var hasRai = function hasRai(num) {
+            num = parseInt(num) / 1000;
+            return num > Math.floor(num);
+        };
+
         currency = '';
 
-        amount = props.payment.amount >= 1000 ? (props.payment.amount / 1000000).toFixed(3) : (props.payment.amount / 1000000).toFixed(6);
+        amount = hasRai(props.payment.amount) ? (parseInt(props.payment.amount) / 1000000).toFixed(6) : (parseInt(props.payment.amount) / 1000000).toFixed(3);
     }
     return jsxDom(
         'div',

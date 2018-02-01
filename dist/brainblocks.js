@@ -7502,7 +7502,10 @@
                 var props = _ref.props, currency = "", amount = "";
                 if ("rai" === props.payment.currency) {
                     currency = "";
-                    amount = props.payment.amount >= 1e3 ? (props.payment.amount / 1e6).toFixed(3) : (props.payment.amount / 1e6).toFixed(6);
+                    amount = function(num) {
+                        num = parseInt(num) / 1e3;
+                        return num > Math.floor(num);
+                    }(props.payment.amount) ? (parseInt(props.payment.amount) / 1e6).toFixed(6) : (parseInt(props.payment.amount) / 1e6).toFixed(3);
                 }
                 return Object(__WEBPACK_IMPORTED_MODULE_0_xcomponent_src_lib__.F)("div", {
                     class: "brainblocks-button-container"
