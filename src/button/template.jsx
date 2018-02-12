@@ -7,7 +7,7 @@ export function buttonTemplate({ props } : { props : Object }) : HTMLElement {
 
     let currency = '';
     let amount = '';
-    
+
     if (props.payment.currency === 'rai') {
         currency = '';
 
@@ -38,7 +38,7 @@ export function buttonTemplate({ props } : { props : Object }) : HTMLElement {
                         text-align: center;
                         letter-spacing: 1px;
                     }
-                    
+
                     .brainblocks-button-content {
                         width: 100%;
                         height: 50px;
@@ -81,7 +81,7 @@ export function buttonTemplate({ props } : { props : Object }) : HTMLElement {
                     }
                 `}
             </style>
-            
+
             <div role="button" class="brainblocks-button">
                 <div class="brainblocks-button-content">
                     <span>

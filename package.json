@@ -1,14 +1,14 @@
 {
   "name": "brainblocks",
   "version": "1.0.7",
-  "description": "Javascript module template.",
+  "description": "Nano currency payment button.",
   "main": "dist/brainblocks.js",
   "module": "dist/brainblocks.js",
   "scripts": {
     "lint": "eslint src/ test/ *.js",
     "flow-typed": "flow-typed install",
     "flow": "flow",
-    "demo": "echo 'Navigate to http://localhost:1337/demo/iframe/index.htm or http://localhost:1337/demo/popup/index.htm' && serve . --port 1337 --silent",
+    "demo": "echo 'Visit http://localhost:1337 to see the button' && serve ./dist --port 1337 --silent",
     "karma": "cross-env NODE_ENV=test babel-node --plugins=transform-es2015-modules-commonjs ./node_modules/.bin/karma start",
     "babel": "babel src/ --out-dir dist/module",
     "webpack": "babel-node --plugins=transform-es2015-modules-commonjs ./node_modules/.bin/webpack --progress",
@@ -35,7 +35,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/krakenjs/xcomponent-demo.git"
+    "url": "git://github.com/brainblocks/brainblocks.git"
   },
   "keywords": [
     "template"

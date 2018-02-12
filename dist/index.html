@@ -1,0 +1,39 @@
+<html>
+<head>
+  <style>
+  body {
+    font-family: arial;
+    padding: 50px;
+  }
+  </style>
+</head>
+<body>
+  <h1>Example Button</h1>
+  <div id="nano-button"></div>
+
+
+  <script type="text/javascript" src="http://localhost:1337/brainblocks.js"></script>
+
+  <script>
+      // Render the Nano button
+      brainblocks.Button.render({
+          env: 'local',
+
+          // Pass in payment options
+
+          payment: {
+              destination: 'xrb_164xaa1ojy6qmq9e8t94mz8izr4mkf1sojb6xrmstru5jsif48g5kegcqg7y',
+              currency:    'rai',
+              amount:      1000
+          },
+
+          // Handle successful payments
+
+          onPayment: function(data) {
+              console.log('Payment successful!', data.token);
+          }
+
+      }, '#nano-button');
+</script>
+</body>
+</html>
