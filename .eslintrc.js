@@ -21,7 +21,8 @@ module.exports = {
         'node': true,
         'amd': false,
         'mocha': true,
-        'es6': true
+        'es6': true,
+        'jest': true
     },
 
     'settings': {
