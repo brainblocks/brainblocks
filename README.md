@@ -2,15 +2,15 @@
 
 https://brainblocks.io
 
-Simple raiblocks checkout
+Simple nano checkout
 
 ```
-<div id="raiblocks-button"></div>
+<div id="nano-button"></div>
 
 <script src="https://brainblocks.io/brainblocks.js"></script>
 
 <script>
-    // Render the RaiBlocks button
+    // Render the Nano button
 
     brainblocks.Button.render({
 
@@ -28,7 +28,7 @@ Simple raiblocks checkout
             console.log('Payment successful!', data.token);
         }
 
-    }, '#raiblocks-button');
+    }, '#nano-button');
 </script>
 ```
 
@@ -36,8 +36,12 @@ Simple raiblocks checkout
 > curl https://brainblocks.io/api/session/<token>/verify
 
 {
-    "token":       "ZXlKaGJHY...",
-    "destination": "xrb_164xa...",
-    "received":    1000
+    "token":        "ZXlKaGJHY...",
+    "destination":  "xrb_164xa...",
+    "currency":     "rai",
+    "amount":       "1000",
+    "amount_rai":   1000,
+    "received_rai": 1000,
+    "fulfilled":    true
 }
 ```
