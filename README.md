@@ -36,8 +36,12 @@ Simple nano checkout
 > curl https://brainblocks.io/api/session/<token>/verify
 
 {
-    "token":       "ZXlKaGJHY...",
-    "destination": "xrb_164xa...",
-    "received":    1000
+    "token":        "ZXlKaGJHY...",
+    "destination":  "xrb_164xa...",
+    "currency":     "rai",
+    "amount":       "1000",
+    "amount_rai":   1000,
+    "received_rai": 1000,
+    "fulfilled":    true
 }
 ```
