@@ -7439,7 +7439,7 @@
                         required: !0,
                         validate: function(payment) {
                             if (!payment.destination) throw new Error("Expected payment.destination");
-                            if (!payment.destination.match(/^xrb_[a-z0-9]{60}$/)) throw new Error("Invalid raiblocks address: " + payment.destination);
+                            if (!payment.destination.match(/((?:xrb_[13][a-km-zA-HJ-NP-Z0-9]{59})|(?:nano_[13][a-km-zA-HJ-NP-Z0-9]{59}))/)) throw new Error("Invalid nano address: " + payment.destination);
                             if (!payment.currency) throw new Error("Expected payment.currency");
                             if ("rai" !== payment.currency && -1 === __WEBPACK_IMPORTED_MODULE_3__config__.a.indexOf(payment.currency)) throw new Error("Expected payment.currency to be rai or " + __WEBPACK_IMPORTED_MODULE_3__config__.a.join(", ") + ", got " + payment.currency);
                             if (!payment.amount) throw new Error("Expected payment.amount");
