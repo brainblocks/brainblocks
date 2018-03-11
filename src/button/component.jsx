@@ -54,8 +54,8 @@ export let Button = create({
                 if (!payment.destination) {
                     throw new Error(`Expected payment.destination`);
                 }
-                if (!payment.destination.match(/^xrb_[a-z0-9]{60}$/)) {
-                    throw new Error(`Invalid raiblocks address: ${ payment.destination }`);
+                if (!payment.destination.match(/((?:xrb_[13][a-km-zA-HJ-NP-Z0-9]{59})|(?:nano_[13][a-km-zA-HJ-NP-Z0-9]{59}))/)) {
+                    throw new Error(`Invalid nano address: ${ payment.destination }`);
                 }
 
                 if (!payment.currency) {
