@@ -82,7 +82,7 @@ export let Button = create({
         
         onToken: {
             type:     'function',
-            required: true
+            required: false
         },
 
         onPayment: {
