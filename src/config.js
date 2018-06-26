@@ -31,6 +31,7 @@ export const SUPPORTED_CURRENCIES = [
     'thb',
     'try',
     'twd',
+    'vnd',
     'usd',
     'zar'
 ];
