@@ -49,18 +49,26 @@ export function buttonTemplate({ props } : { props : Object }) : HTMLElement {
                         align-items: center;
                     }
 
+                    .brainblocks-button .brainblocks-logo {
+                        height: 20px;
+                        margin-right: 10px;
+                        border-right: 1px solid #ccc;
+                        padding-right: 10px;
+                        vertical-align: middle;
+                    }
+
                     .brainblocks-button .brainblocks-raiblocks-logo {
-                        height: 15px;
+                        height: 10px;
                         margin-left: 10px;
                         border-left: 1px solid #ccc;
-                        padding-left: 10px;
+                        padding: 5px 0 5px 10px;
                     }
 
                     .brainblocks-button .brainblocks-raiblocks-logo-small {
-                        height: 15px;
+                        height: 10px;
                         margin-left: 5px;
                         border-left: 1px solid #ccc;
-                        padding-left: 5px;
+                        padding: 5px 0 5px 5px;
                         display: none;
                     }
 
@@ -85,6 +93,7 @@ export function buttonTemplate({ props } : { props : Object }) : HTMLElement {
             <div role="button" class="brainblocks-button">
                 <div class="brainblocks-button-content">
                     <span>
+                        <img class="brainblocks-logo" src="https://brainblocks.io/static/img/brainblocks_logo.svg" />
                         <span class="pay-text">{ amount && 'Pay ' }</span>
                         <span>
                             <span id="pay-amount" class="pay-amount">{ amount || <img class="loading-spinner" src="data:image/svg+xml;base64,PHN2ZyB4bWxuczpzdmc9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjAiIHdpZHRoPSIyNXB4IiBoZWlnaHQ9IjI1cHgiIHZpZXdCb3g9IjAgMCAxMjggMTI4IiB4bWw6c3BhY2U9InByZXNlcnZlIj48Zz48cGF0aCBkPSJNNzguNzUgMTYuMThWMS41NmE2NC4xIDY0LjEgMCAwIDEgNDcuNyA0Ny43SDExMS44YTQ5Ljk4IDQ5Ljk4IDAgMCAwLTMzLjA3LTMzLjA4ek0xNi40MyA0OS4yNUgxLjhhNjQuMSA2NC4xIDAgMCAxIDQ3LjctNDcuN1YxNi4yYTQ5Ljk4IDQ5Ljk4IDAgMCAwLTMzLjA3IDMzLjA3em0zMy4wNyA2Mi4zMnYxNC42MkE2NC4xIDY0LjEgMCAwIDEgMS44IDc4LjVoMTQuNjNhNDkuOTggNDkuOTggMCAwIDAgMzMuMDcgMzMuMDd6bTYyLjMyLTMzLjA3aDE0LjYyYTY0LjEgNjQuMSAwIDAgMS00Ny43IDQ3Ljd2LTE0LjYzYTQ5Ljk4IDQ5Ljk4IDAgMCAwIDMzLjA4LTMzLjA3eiIgZmlsbD0iIzgxY2RmMSIgZmlsbC1vcGFjaXR5PSIxIi8+PGFuaW1hdGVUcmFuc2Zvcm0gYXR0cmlidXRlTmFtZT0idHJhbnNmb3JtIiB0eXBlPSJyb3RhdGUiIGZyb209Ii05MCA2NCA2NCIgdG89IjAgNjQgNjQiIGR1cj0iNDAwbXMiIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIj48L2FuaW1hdGVUcmFuc2Zvcm0+PC9nPjwvc3ZnPg==" /> }</span>
