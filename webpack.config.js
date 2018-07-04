@@ -146,7 +146,13 @@ export let WEBPACK_CONFIG_TEST = getWebpackConfig({
         devtool: 'inline-source-map'
     },
     vars: {
-        __TEST__: true
+        __TEST__:       true,
+        __XCOMPONENT__: {
+
+        },
+        __POST_ROBOT__: {
+
+        }
     }
 });
 
