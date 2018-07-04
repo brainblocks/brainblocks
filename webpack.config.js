@@ -127,7 +127,16 @@ function getWebpackConfig({ filename, modulename, minify = false, options = {}, 
 
 export let WEBPACK_CONFIG = getWebpackConfig({
     filename:   `${ FILE_NAME }.js`,
-    modulename: MODULE_NAME
+    modulename: MODULE_NAME,
+    vars:       {
+        __XCOMPONENT__: {
+            __POPUP_SUPPORT__: false
+        },
+        __POST_ROBOT__: {
+            __IE_POPUP_SUPPORT__:        false,
+            __ALLOW_POSTMESSAGE_POPUP__: true
+        }
+    }
 });
 
 export let WEBPACK_CONFIG_MIN = getWebpackConfig({
@@ -135,7 +144,14 @@ export let WEBPACK_CONFIG_MIN = getWebpackConfig({
     modulename: MODULE_NAME,
     minify:     true,
     vars:       {
-        __MIN__: true
+        __MIN__:        true,
+        __XCOMPONENT__: {
+            __POPUP_SUPPORT__: false
+        },
+        __POST_ROBOT__: {
+            __IE_POPUP_SUPPORT__:        false,
+            __ALLOW_POSTMESSAGE_POPUP__: true
+        }
     }
 });
 
@@ -148,10 +164,11 @@ export let WEBPACK_CONFIG_TEST = getWebpackConfig({
     vars: {
         __TEST__:       true,
         __XCOMPONENT__: {
-
+            __POPUP_SUPPORT__: false
         },
         __POST_ROBOT__: {
-
+            __IE_POPUP_SUPPORT__:        false,
+            __ALLOW_POSTMESSAGE_POPUP__: true
         }
     }
 });
