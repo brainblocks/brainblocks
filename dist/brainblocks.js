@@ -2313,7 +2313,10 @@
                 return CONFIG;
             });
             var _ALLOWED_POST_MESSAGE, __WEBPACK_IMPORTED_MODULE_0__constants__ = __webpack_require__("./node_modules/post-robot/src/conf/constants.js"), CONFIG = {
-                ALLOW_POSTMESSAGE_POPUP: "__ALLOW_POSTMESSAGE_POPUP__" in window ? window.__ALLOW_POSTMESSAGE_POPUP__ : __POST_ROBOT__.__ALLOW_POSTMESSAGE_POPUP__,
+                ALLOW_POSTMESSAGE_POPUP: "__ALLOW_POSTMESSAGE_POPUP__" in window ? window.__ALLOW_POSTMESSAGE_POPUP__ : {
+                    __IE_POPUP_SUPPORT__: !1,
+                    __ALLOW_POSTMESSAGE_POPUP__: !0
+                }.__ALLOW_POSTMESSAGE_POPUP__,
                 LOG_LEVEL: "info",
                 BRIDGE_TIMEOUT: 5e3,
                 CHILD_WINDOW_TIMEOUT: 5e3,
@@ -2647,7 +2650,10 @@
                     origin: event.origin || event.originalEvent && event.originalEvent.origin,
                     data: event.data
                 };
-                if (__POST_ROBOT__.__IE_POPUP_SUPPORT__) try {
+                if ({
+                    __IE_POPUP_SUPPORT__: !1,
+                    __ALLOW_POSTMESSAGE_POPUP__: !0
+                }.__IE_POPUP_SUPPORT__) try {
                     __webpack_require__("./node_modules/post-robot/src/compat/index.js").emulateIERestrictions(messageEvent.source, window);
                 } catch (err) {
                     return;
@@ -2809,7 +2815,10 @@
             });
             var __WEBPACK_IMPORTED_MODULE_0_cross_domain_utils_src__ = __webpack_require__("./node_modules/cross-domain-utils/src/index.js"), __WEBPACK_IMPORTED_MODULE_1__conf__ = __webpack_require__("./node_modules/post-robot/src/conf/index.js"), SEND_MESSAGE_STRATEGIES = {};
             SEND_MESSAGE_STRATEGIES[__WEBPACK_IMPORTED_MODULE_1__conf__.b.SEND_STRATEGIES.POST_MESSAGE] = function(win, serializedMessage, domain) {
-                if (__POST_ROBOT__.__IE_POPUP_SUPPORT__) try {
+                if ({
+                    __IE_POPUP_SUPPORT__: !1,
+                    __ALLOW_POSTMESSAGE_POPUP__: !0
+                }.__IE_POPUP_SUPPORT__) try {
                     __webpack_require__("./node_modules/post-robot/src/compat/index.js").emulateIERestrictions(window, win);
                 } catch (err) {
                     return;
@@ -2828,7 +2837,10 @@
                     return win.postMessage(serializedMessage, dom);
                 });
             };
-            if (__POST_ROBOT__.__IE_POPUP_SUPPORT__) {
+            if ({
+                __IE_POPUP_SUPPORT__: !1,
+                __ALLOW_POSTMESSAGE_POPUP__: !0
+            }.__IE_POPUP_SUPPORT__) {
                 var _require = __webpack_require__("./node_modules/post-robot/src/bridge/index.js"), sendBridgeMessage = _require.sendBridgeMessage, needsBridgeForBrowser = _require.needsBridgeForBrowser, isBridge = _require.isBridge;
                 SEND_MESSAGE_STRATEGIES[__WEBPACK_IMPORTED_MODULE_1__conf__.b.SEND_STRATEGIES.BRIDGE] = function(win, serializedMessage, domain) {
                     if (needsBridgeForBrowser() || isBridge()) {
@@ -2921,7 +2933,10 @@
             function init() {
                 if (!__WEBPACK_IMPORTED_MODULE_2__global__.a.initialized) {
                     Object(__WEBPACK_IMPORTED_MODULE_1__drivers__.d)();
-                    __POST_ROBOT__.__IE_POPUP_SUPPORT__ && __webpack_require__("./node_modules/post-robot/src/bridge/index.js").openTunnelToOpener();
+                    ({
+                        __IE_POPUP_SUPPORT__: !1,
+                        __ALLOW_POSTMESSAGE_POPUP__: !0
+                    }).__IE_POPUP_SUPPORT__ && __webpack_require__("./node_modules/post-robot/src/bridge/index.js").openTunnelToOpener();
                     Object(__WEBPACK_IMPORTED_MODULE_0__lib__.d)();
                     Object(__WEBPACK_IMPORTED_MODULE_0__lib__.h)({
                         on: __WEBPACK_IMPORTED_MODULE_3__public__.g,
@@ -2982,7 +2997,10 @@
             __webpack_require__.d(__webpack_exports__, "Promise", function() {
                 return __WEBPACK_IMPORTED_MODULE_5_zalgo_promise_src__.a;
             });
-            var bridge = __POST_ROBOT__.__IE_POPUP_SUPPORT__ ? __webpack_require__("./node_modules/post-robot/src/bridge/interface.js") : null;
+            var bridge = {
+                __IE_POPUP_SUPPORT__: !1,
+                __ALLOW_POSTMESSAGE_POPUP__: !0
+            }.__IE_POPUP_SUPPORT__ ? __webpack_require__("./node_modules/post-robot/src/bridge/interface.js") : null;
             init();
         },
         "./node_modules/post-robot/src/lib/index.js": function(module, __webpack_exports__, __webpack_require__) {
@@ -4939,7 +4957,9 @@
                     if (options.dimensions && !Object(__WEBPACK_IMPORTED_MODULE_1__lib__.E)(options.dimensions.height) && !Object(__WEBPACK_IMPORTED_MODULE_1__lib__.D)(options.dimensions.height)) throw new Error("Expected options.dimensions.height to be a px or % string value");
                 }
                 if (options.contexts) {
-                    if (options.contexts.popup && !__XCOMPONENT__.__POPUP_SUPPORT__) throw new Error("Popups not supported in this build -- please use the full xcomponent.js build");
+                    if (options.contexts.popup && !{
+                        __POPUP_SUPPORT__: !1
+                    }.__POPUP_SUPPORT__) throw new Error("Popups not supported in this build -- please use the full xcomponent.js build");
                     for (var anyEnabled = !1, _iterator2 = Object.keys(options.contexts), _isArray2 = Array.isArray(_iterator2), _i2 = 0, _iterator2 = _isArray2 ? _iterator2 : _iterator2[Symbol.iterator](); ;) {
                         var _ref2;
                         if (_isArray2) {
@@ -5265,7 +5285,9 @@
                     this.iframe.setAttribute("src", url);
                 }
             };
-            __XCOMPONENT__.__POPUP_SUPPORT__ && (RENDER_DRIVERS[__WEBPACK_IMPORTED_MODULE_4__constants__.CONTEXT_TYPES.POPUP] = {
+            ({
+                __POPUP_SUPPORT__: !1
+            }).__POPUP_SUPPORT__ && (RENDER_DRIVERS[__WEBPACK_IMPORTED_MODULE_4__constants__.CONTEXT_TYPES.POPUP] = {
                 focusable: !0,
                 renderedIntoContainerTemplate: !1,
                 allowResize: !1,
