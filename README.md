@@ -17,7 +17,7 @@ Simple nano checkout
         // Pass in payment options
 
         payment: {
-            destination: 'xrb_164xaa1ojy6qmq9e8t94mz8izr4mkf1sojb6xrmstru5jsif48g5kegcqg7y',
+            destination: 'nano_164xaa1ojy6qmq9e8t94mz8izr4mkf1sojb6xrmstru5jsif48g5kegcqg7y',
             currency:    'rai',
             amount:      1000
         },
@@ -44,6 +44,6 @@ Simple nano checkout
     "received_rai": 1000,
     "fulfilled": true,
     "send_block": "0B36663...",
-    "sender": "xrb_1jnat..."
+    "sender": "nano_1jnat..."
 }
 ```
