@@ -37,7 +37,7 @@ Simple nano checkout
 
 {
     "token": "ZXlKaGJHY...",
-    "destination": "xrb_164xa...",
+    "destination": "nano_164xa...",
     "currency": "rai",
     "amount": "1000",
     "amount_rai": 1000,
