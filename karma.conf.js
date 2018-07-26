@@ -16,7 +16,7 @@ export default function configKarma(config : Object) {
     let headless       = !keepOpen;
 
     // $FlowFixMe
-    let browsers: string = argv.browser;
+    let browsers : string = argv.browser;
 
     let karmaConfig : Object = {
 
