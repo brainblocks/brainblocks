@@ -1789,7 +1789,7 @@
                     }
                     var key = _ref, tunnelWindow = tunnelWindows[key];
                     try {
-                        Object(__WEBPACK_IMPORTED_MODULE_3__lib__.j)(tunnelWindow.source);
+                        Object(__WEBPACK_IMPORTED_MODULE_3__lib__.k)(tunnelWindow.source);
                     } catch (err) {
                         deleteTunnelWindow(key);
                         continue;
@@ -1830,7 +1830,7 @@
                     sendMessage: function() {
                         var tunnelWindow = getTunnelWindow(id);
                         try {
-                            Object(__WEBPACK_IMPORTED_MODULE_3__lib__.j)(tunnelWindow && tunnelWindow.source);
+                            Object(__WEBPACK_IMPORTED_MODULE_3__lib__.k)(tunnelWindow && tunnelWindow.source);
                         } catch (err) {
                             deleteTunnelWindow(id);
                             return;
@@ -1865,7 +1865,7 @@
                                 canary: function() {},
                                 sendMessage: function(message) {
                                     try {
-                                        Object(__WEBPACK_IMPORTED_MODULE_3__lib__.j)(window);
+                                        Object(__WEBPACK_IMPORTED_MODULE_3__lib__.k)(window);
                                     } catch (err) {
                                         return;
                                     }
@@ -1892,7 +1892,7 @@
                 });
             }
             __webpack_exports__.a = openTunnelToOpener;
-            var __WEBPACK_IMPORTED_MODULE_0_zalgo_promise_src__ = __webpack_require__("./node_modules/zalgo-promise/src/index.js"), __WEBPACK_IMPORTED_MODULE_1_cross_domain_utils_src__ = __webpack_require__("./node_modules/cross-domain-utils/src/index.js"), __WEBPACK_IMPORTED_MODULE_2__conf__ = __webpack_require__("./node_modules/post-robot/src/conf/index.js"), __WEBPACK_IMPORTED_MODULE_3__lib__ = __webpack_require__("./node_modules/post-robot/src/lib/index.js"), __WEBPACK_IMPORTED_MODULE_4__global__ = __webpack_require__("./node_modules/post-robot/src/global.js"), __WEBPACK_IMPORTED_MODULE_5__common__ = __webpack_require__("./node_modules/post-robot/src/bridge/common.js"), awaitRemoteBridgeForWindow = Object(__WEBPACK_IMPORTED_MODULE_3__lib__.r)(function(win) {
+            var __WEBPACK_IMPORTED_MODULE_0_zalgo_promise_src__ = __webpack_require__("./node_modules/zalgo-promise/src/index.js"), __WEBPACK_IMPORTED_MODULE_1_cross_domain_utils_src__ = __webpack_require__("./node_modules/cross-domain-utils/src/index.js"), __WEBPACK_IMPORTED_MODULE_2__conf__ = __webpack_require__("./node_modules/post-robot/src/conf/index.js"), __WEBPACK_IMPORTED_MODULE_3__lib__ = __webpack_require__("./node_modules/post-robot/src/lib/index.js"), __WEBPACK_IMPORTED_MODULE_4__global__ = __webpack_require__("./node_modules/post-robot/src/global.js"), __WEBPACK_IMPORTED_MODULE_5__common__ = __webpack_require__("./node_modules/post-robot/src/bridge/common.js"), awaitRemoteBridgeForWindow = Object(__WEBPACK_IMPORTED_MODULE_3__lib__.s)(function(win) {
                 return __WEBPACK_IMPORTED_MODULE_0_zalgo_promise_src__.a.try(function() {
                     for (var _iterator = Object(__WEBPACK_IMPORTED_MODULE_1_cross_domain_utils_src__.getFrames)(win), _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator](); ;) {
                         var _ref;
@@ -2185,7 +2185,7 @@
                             iframe.onload = resolve;
                             iframe.onerror = reject;
                         }).then(function() {
-                            return Object(__WEBPACK_IMPORTED_MODULE_4__lib__.k)(bridge, __WEBPACK_IMPORTED_MODULE_3__conf__.a.BRIDGE_TIMEOUT, "Bridge " + url);
+                            return Object(__WEBPACK_IMPORTED_MODULE_4__lib__.l)(bridge, __WEBPACK_IMPORTED_MODULE_3__conf__.a.BRIDGE_TIMEOUT, "Bridge " + url);
                         }).then(function() {
                             return bridge;
                         });
@@ -2641,7 +2641,7 @@
             }
             function messageListener(event) {
                 try {
-                    Object(__WEBPACK_IMPORTED_MODULE_2__lib__.j)(event.source);
+                    Object(__WEBPACK_IMPORTED_MODULE_2__lib__.k)(event.source);
                 } catch (err) {
                     return;
                 }
@@ -2722,16 +2722,16 @@
                         data: data
                     });
                 }, function(err) {
-                    var error = Object(__WEBPACK_IMPORTED_MODULE_3__lib__.p)(err).replace(/^Error: /, ""), code = err.code;
+                    var error = Object(__WEBPACK_IMPORTED_MODULE_3__lib__.q)(err).replace(/^Error: /, ""), code = err.code;
                     return respond({
                         type: __WEBPACK_IMPORTED_MODULE_2__conf__.b.POST_MESSAGE_TYPE.RESPONSE,
                         ack: __WEBPACK_IMPORTED_MODULE_2__conf__.b.POST_MESSAGE_ACK.ERROR,
                         error: error,
                         code: code
                     });
-                }) ]).then(__WEBPACK_IMPORTED_MODULE_3__lib__.j).catch(function(err) {
+                }) ]).then(__WEBPACK_IMPORTED_MODULE_3__lib__.k).catch(function(err) {
                     if (options && options.handleError) return options.handleError(err);
-                    __WEBPACK_IMPORTED_MODULE_3__lib__.i.error(Object(__WEBPACK_IMPORTED_MODULE_3__lib__.p)(err));
+                    __WEBPACK_IMPORTED_MODULE_3__lib__.i.error(Object(__WEBPACK_IMPORTED_MODULE_3__lib__.q)(err));
                 });
             }, _RECEIVE_MESSAGE_TYPE[__WEBPACK_IMPORTED_MODULE_2__conf__.b.POST_MESSAGE_TYPE.RESPONSE] = function(source, origin, message) {
                 if (!Object(__WEBPACK_IMPORTED_MODULE_5__listeners__.f)(message.hash)) {
@@ -2758,7 +2758,7 @@
         "./node_modules/post-robot/src/drivers/send/index.js": function(module, __webpack_exports__, __webpack_require__) {
             "use strict";
             function buildMessage(win, message) {
-                var options = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : {}, id = Object(__WEBPACK_IMPORTED_MODULE_3__lib__.q)(), type = Object(__WEBPACK_IMPORTED_MODULE_3__lib__.c)(), sourceDomain = Object(__WEBPACK_IMPORTED_MODULE_0_cross_domain_utils_src__.getDomain)(window);
+                var options = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : {}, id = Object(__WEBPACK_IMPORTED_MODULE_3__lib__.r)(), type = Object(__WEBPACK_IMPORTED_MODULE_3__lib__.c)(), sourceDomain = Object(__WEBPACK_IMPORTED_MODULE_0_cross_domain_utils_src__.getDomain)(window);
                 return _extends({}, message, options, {
                     sourceDomain: sourceDomain,
                     id: message.id || id,
@@ -2769,7 +2769,7 @@
                 return __WEBPACK_IMPORTED_MODULE_1_zalgo_promise_src__.a.try(function() {
                     var _jsonStringify;
                     message = buildMessage(win, message, {
-                        data: Object(__WEBPACK_IMPORTED_MODULE_3__lib__.o)(win, domain, message.data),
+                        data: Object(__WEBPACK_IMPORTED_MODULE_3__lib__.p)(win, domain, message.data),
                         domain: domain
                     });
                     var level = void 0;
@@ -2789,7 +2789,7 @@
                             messages.push(strategyName + ": success");
                             return !0;
                         }, function(err) {
-                            messages.push(strategyName + ": " + Object(__WEBPACK_IMPORTED_MODULE_3__lib__.p)(err) + "\n");
+                            messages.push(strategyName + ": " + Object(__WEBPACK_IMPORTED_MODULE_3__lib__.q)(err) + "\n");
                             return !1;
                         });
                     }).then(function(results) {
@@ -2813,7 +2813,7 @@
             __webpack_require__.d(__webpack_exports__, "a", function() {
                 return SEND_MESSAGE_STRATEGIES;
             });
-            var __WEBPACK_IMPORTED_MODULE_0_cross_domain_utils_src__ = __webpack_require__("./node_modules/cross-domain-utils/src/index.js"), __WEBPACK_IMPORTED_MODULE_1__conf__ = __webpack_require__("./node_modules/post-robot/src/conf/index.js"), SEND_MESSAGE_STRATEGIES = {};
+            var __WEBPACK_IMPORTED_MODULE_0_cross_domain_utils_src__ = __webpack_require__("./node_modules/cross-domain-utils/src/index.js"), __WEBPACK_IMPORTED_MODULE_1__conf__ = __webpack_require__("./node_modules/post-robot/src/conf/index.js"), __WEBPACK_IMPORTED_MODULE_2__lib__ = __webpack_require__("./node_modules/post-robot/src/lib/index.js"), SEND_MESSAGE_STRATEGIES = {};
             SEND_MESSAGE_STRATEGIES[__WEBPACK_IMPORTED_MODULE_1__conf__.b.SEND_STRATEGIES.POST_MESSAGE] = function(win, serializedMessage, domain) {
                 if ({
                     __IE_POPUP_SUPPORT__: !1,
@@ -2849,20 +2849,26 @@
                         return sendBridgeMessage(win, serializedMessage, domain);
                     }
                 };
-                SEND_MESSAGE_STRATEGIES[__WEBPACK_IMPORTED_MODULE_1__conf__.b.SEND_STRATEGIES.GLOBAL] = function(win, serializedMessage) {
-                    if (needsBridgeForBrowser()) {
-                        if (!Object(__WEBPACK_IMPORTED_MODULE_0_cross_domain_utils_src__.isSameDomain)(win)) throw new Error("Post message through global disabled between different domain windows");
-                        if (!1 !== Object(__WEBPACK_IMPORTED_MODULE_0_cross_domain_utils_src__.isSameTopWindow)(window, win)) throw new Error("Can only use global to communicate between two different windows, not between frames");
-                        var foreignGlobal = win[__WEBPACK_IMPORTED_MODULE_1__conf__.b.WINDOW_PROPS.POSTROBOT];
-                        if (!foreignGlobal) throw new Error("Can not find postRobot global on foreign window");
-                        return foreignGlobal.receiveMessage({
-                            source: window,
-                            origin: Object(__WEBPACK_IMPORTED_MODULE_0_cross_domain_utils_src__.getDomain)(),
-                            data: serializedMessage
-                        });
-                    }
-                };
             }
+            (({
+                __IE_POPUP_SUPPORT__: !1,
+                __ALLOW_POSTMESSAGE_POPUP__: !0
+            }).__IE_POPUP_SUPPORT__ || {
+                __IE_POPUP_SUPPORT__: !1,
+                __ALLOW_POSTMESSAGE_POPUP__: !0
+            }.__GLOBAL_MESSAGE_SUPPORT__) && (SEND_MESSAGE_STRATEGIES[__WEBPACK_IMPORTED_MODULE_1__conf__.b.SEND_STRATEGIES.GLOBAL] = function(win, serializedMessage) {
+                if (Object(__WEBPACK_IMPORTED_MODULE_2__lib__.j)()) {
+                    if (!Object(__WEBPACK_IMPORTED_MODULE_0_cross_domain_utils_src__.isSameDomain)(win)) throw new Error("Post message through global disabled between different domain windows");
+                    if (!1 !== Object(__WEBPACK_IMPORTED_MODULE_0_cross_domain_utils_src__.isSameTopWindow)(window, win)) throw new Error("Can only use global to communicate between two different windows, not between frames");
+                    var foreignGlobal = win[__WEBPACK_IMPORTED_MODULE_1__conf__.b.WINDOW_PROPS.POSTROBOT];
+                    if (!foreignGlobal) throw new Error("Can not find postRobot global on foreign window");
+                    return foreignGlobal.receiveMessage({
+                        source: window,
+                        origin: Object(__WEBPACK_IMPORTED_MODULE_0_cross_domain_utils_src__.getDomain)(),
+                        data: serializedMessage
+                    });
+                }
+            });
         },
         "./node_modules/post-robot/src/global.js": function(module, __webpack_exports__, __webpack_require__) {
             "use strict";
@@ -3024,13 +3030,13 @@
             __webpack_require__.d(__webpack_exports__, "j", function() {
                 return __WEBPACK_IMPORTED_MODULE_0__util__.f;
             });
-            __webpack_require__.d(__webpack_exports__, "l", function() {
+            __webpack_require__.d(__webpack_exports__, "k", function() {
                 return __WEBPACK_IMPORTED_MODULE_0__util__.g;
             });
             __webpack_require__.d(__webpack_exports__, "m", function() {
-                return __WEBPACK_IMPORTED_MODULE_0__util__.i;
+                return __WEBPACK_IMPORTED_MODULE_0__util__.h;
             });
-            __webpack_require__.d(__webpack_exports__, "p", function() {
+            __webpack_require__.d(__webpack_exports__, "n", function() {
                 return __WEBPACK_IMPORTED_MODULE_0__util__.j;
             });
             __webpack_require__.d(__webpack_exports__, "q", function() {
@@ -3038,6 +3044,9 @@
             });
             __webpack_require__.d(__webpack_exports__, "r", function() {
                 return __WEBPACK_IMPORTED_MODULE_0__util__.l;
+            });
+            __webpack_require__.d(__webpack_exports__, "s", function() {
+                return __WEBPACK_IMPORTED_MODULE_0__util__.m;
             });
             var __WEBPACK_IMPORTED_MODULE_1__log__ = __webpack_require__("./node_modules/post-robot/src/lib/log.js");
             __webpack_require__.d(__webpack_exports__, "i", function() {
@@ -3050,17 +3059,17 @@
             __webpack_require__.d(__webpack_exports__, "h", function() {
                 return __WEBPACK_IMPORTED_MODULE_2__serialize__.b;
             });
-            __webpack_require__.d(__webpack_exports__, "o", function() {
+            __webpack_require__.d(__webpack_exports__, "p", function() {
                 return __WEBPACK_IMPORTED_MODULE_2__serialize__.c;
             });
             var __WEBPACK_IMPORTED_MODULE_3__ready__ = __webpack_require__("./node_modules/post-robot/src/lib/ready.js");
             __webpack_require__.d(__webpack_exports__, "d", function() {
                 return __WEBPACK_IMPORTED_MODULE_3__ready__.a;
             });
-            __webpack_require__.d(__webpack_exports__, "k", function() {
+            __webpack_require__.d(__webpack_exports__, "l", function() {
                 return __WEBPACK_IMPORTED_MODULE_3__ready__.b;
             });
-            __webpack_require__.d(__webpack_exports__, "n", function() {
+            __webpack_require__.d(__webpack_exports__, "o", function() {
                 return __WEBPACK_IMPORTED_MODULE_3__ready__.c;
             });
         },
@@ -3186,7 +3195,7 @@
                 });
                 var parent = Object(__WEBPACK_IMPORTED_MODULE_1_cross_domain_utils_src__.getAncestor)();
                 parent && sayHello(parent).catch(function(err) {
-                    __WEBPACK_IMPORTED_MODULE_5__log__.a.debug(Object(__WEBPACK_IMPORTED_MODULE_6__util__.j)(err));
+                    __WEBPACK_IMPORTED_MODULE_5__log__.a.debug(Object(__WEBPACK_IMPORTED_MODULE_6__util__.k)(err));
                 });
             }
             function onChildWindowReady(win) {
@@ -3211,7 +3220,7 @@
                 return "object" === (void 0 === item ? "undefined" : _typeof(item)) && null !== item && item.__type__ === type;
             }
             function serializeMethod(destination, domain, method, name) {
-                var id = Object(__WEBPACK_IMPORTED_MODULE_5__util__.k)(), methods = __WEBPACK_IMPORTED_MODULE_4__global__.a.methods.get(destination);
+                var id = Object(__WEBPACK_IMPORTED_MODULE_5__util__.l)(), methods = __WEBPACK_IMPORTED_MODULE_4__global__.a.methods.get(destination);
                 if (!methods) {
                     methods = {};
                     __WEBPACK_IMPORTED_MODULE_4__global__.a.methods.set(destination, methods);
@@ -3229,7 +3238,7 @@
             function serializeError(err) {
                 return {
                     __type__: __WEBPACK_IMPORTED_MODULE_3__conf__.b.SERIALIZATION_TYPES.ERROR,
-                    __message__: Object(__WEBPACK_IMPORTED_MODULE_5__util__.j)(err),
+                    __message__: Object(__WEBPACK_IMPORTED_MODULE_5__util__.k)(err),
                     __code__: err.code
                 };
             }
@@ -3256,7 +3265,7 @@
                 };
             }
             function serializeMethods(destination, domain, obj) {
-                return Object(__WEBPACK_IMPORTED_MODULE_5__util__.h)({
+                return Object(__WEBPACK_IMPORTED_MODULE_5__util__.i)({
                     obj: obj
                 }, function(item, key) {
                     return "function" == typeof item ? serializeMethod(destination, domain, item, key.toString()) : item instanceof Error ? serializeError(item) : window.Promise && item instanceof window.Promise ? serializePromise(destination, domain, item, key.toString()) : __WEBPACK_IMPORTED_MODULE_2_zalgo_promise_src__.a.isPromise(item) ? serializeZalgoPromise(destination, domain, item, key.toString()) : Object(__WEBPACK_IMPORTED_MODULE_5__util__.c)(item) ? serializeRegex(item) : void 0;
@@ -3278,7 +3287,7 @@
                         __WEBPACK_IMPORTED_MODULE_6__log__.a.debug("Got foreign method result", obj.__name__, data.result);
                         return data.result;
                     }, function(err) {
-                        __WEBPACK_IMPORTED_MODULE_6__log__.a.debug("Got foreign method error", Object(__WEBPACK_IMPORTED_MODULE_5__util__.j)(err));
+                        __WEBPACK_IMPORTED_MODULE_6__log__.a.debug("Got foreign method error", Object(__WEBPACK_IMPORTED_MODULE_5__util__.k)(err));
                         throw err;
                     });
                 }
@@ -3307,7 +3316,7 @@
                 return new RegExp(item.__source__);
             }
             function deserializeMethods(source, origin, obj) {
-                return Object(__WEBPACK_IMPORTED_MODULE_5__util__.h)({
+                return Object(__WEBPACK_IMPORTED_MODULE_5__util__.i)({
                     obj: obj
                 }, function(item) {
                     if ("object" === (void 0 === item ? "undefined" : _typeof(item)) && null !== item) return isSerialized(item, __WEBPACK_IMPORTED_MODULE_3__conf__.b.SERIALIZATION_TYPES.METHOD) ? deserializeMethod(source, origin, item) : isSerialized(item, __WEBPACK_IMPORTED_MODULE_3__conf__.b.SERIALIZATION_TYPES.ERROR) ? deserializeError(source, origin, item) : isSerialized(item, __WEBPACK_IMPORTED_MODULE_3__conf__.b.SERIALIZATION_TYPES.PROMISE) ? deserializePromise(source, origin, item) : isSerialized(item, __WEBPACK_IMPORTED_MODULE_3__conf__.b.SERIALIZATION_TYPES.ZALGO_PROMISE) ? deserializeZalgoPromise(source, origin, item) : isSerialized(item, __WEBPACK_IMPORTED_MODULE_3__conf__.b.SERIALIZATION_TYPES.REGEX) ? deserializeRegex(source, origin, item) : void 0;
@@ -3324,7 +3333,7 @@
                 return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
             };
             __WEBPACK_IMPORTED_MODULE_4__global__.a.methods = __WEBPACK_IMPORTED_MODULE_4__global__.a.methods || new __WEBPACK_IMPORTED_MODULE_0_cross_domain_safe_weakmap_src__.a();
-            var listenForMethods = Object(__WEBPACK_IMPORTED_MODULE_5__util__.g)(function() {
+            var listenForMethods = Object(__WEBPACK_IMPORTED_MODULE_5__util__.h)(function() {
                 __WEBPACK_IMPORTED_MODULE_4__global__.a.on(__WEBPACK_IMPORTED_MODULE_3__conf__.b.POST_MESSAGE_NAMES.METHOD, {
                     origin: __WEBPACK_IMPORTED_MODULE_3__conf__.b.WILDCARD
                 }, function(_ref) {
@@ -3454,22 +3463,26 @@
             function jsonParse(item) {
                 return JSON.parse(item);
             }
-            __webpack_exports__.j = stringifyError;
-            __webpack_require__.d(__webpack_exports__, "g", function() {
+            function needsGlobalMessagingForBrowser() {
+                return !!Object(__WEBPACK_IMPORTED_MODULE_1_cross_domain_utils_src__.getUserAgent)(window).match(/MSIE|trident|edge\/12|edge\/13/i) || !__WEBPACK_IMPORTED_MODULE_2__conf__.a.ALLOW_POSTMESSAGE_POPUP;
+            }
+            __webpack_exports__.k = stringifyError;
+            __webpack_require__.d(__webpack_exports__, "h", function() {
                 return once;
             });
-            __webpack_exports__.f = noop;
+            __webpack_exports__.g = noop;
             __webpack_exports__.a = addEventListener;
-            __webpack_exports__.k = uniqueID;
-            __webpack_exports__.h = replaceObject;
-            __webpack_exports__.i = safeInterval;
+            __webpack_exports__.l = uniqueID;
+            __webpack_exports__.i = replaceObject;
+            __webpack_exports__.j = safeInterval;
             __webpack_exports__.c = isRegex;
-            __webpack_require__.d(__webpack_exports__, "l", function() {
+            __webpack_require__.d(__webpack_exports__, "m", function() {
                 return weakMapMemoize;
             });
             __webpack_exports__.b = getWindowType;
             __webpack_exports__.e = jsonStringify;
             __webpack_exports__.d = jsonParse;
+            __webpack_exports__.f = needsGlobalMessagingForBrowser;
             var __WEBPACK_IMPORTED_MODULE_0_cross_domain_safe_weakmap_src__ = __webpack_require__("./node_modules/cross-domain-safe-weakmap/src/index.js"), __WEBPACK_IMPORTED_MODULE_1_cross_domain_utils_src__ = __webpack_require__("./node_modules/cross-domain-utils/src/index.js"), __WEBPACK_IMPORTED_MODULE_2__conf__ = __webpack_require__("./node_modules/post-robot/src/conf/index.js"), _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(obj) {
                 return typeof obj;
             } : function(obj) {
@@ -3514,7 +3527,7 @@
                     if (!targetWindow) throw new Error("Expected options.window to be a window object, iframe, or iframe element id.");
                     var win = targetWindow;
                     domain = options.domain || __WEBPACK_IMPORTED_MODULE_3__conf__.b.WILDCARD;
-                    var hash = options.name + "_" + Object(__WEBPACK_IMPORTED_MODULE_5__lib__.q)();
+                    var hash = options.name + "_" + Object(__WEBPACK_IMPORTED_MODULE_5__lib__.r)();
                     if (Object(__WEBPACK_IMPORTED_MODULE_2_cross_domain_utils_src__.isWindowClosed)(win)) throw new Error("Target window is closed");
                     var hasResult = !1, requestPromises = __WEBPACK_IMPORTED_MODULE_6__global__.a.requestPromises.get(win);
                     if (!requestPromises) {
@@ -3522,10 +3535,10 @@
                         __WEBPACK_IMPORTED_MODULE_6__global__.a.requestPromises.set(win, requestPromises);
                     }
                     var requestPromise = __WEBPACK_IMPORTED_MODULE_1_zalgo_promise_src__.a.try(function() {
-                        if (Object(__WEBPACK_IMPORTED_MODULE_2_cross_domain_utils_src__.isAncestor)(window, win)) return Object(__WEBPACK_IMPORTED_MODULE_5__lib__.k)(win, options.timeout || __WEBPACK_IMPORTED_MODULE_3__conf__.a.CHILD_WINDOW_TIMEOUT);
+                        if (Object(__WEBPACK_IMPORTED_MODULE_2_cross_domain_utils_src__.isAncestor)(window, win)) return Object(__WEBPACK_IMPORTED_MODULE_5__lib__.l)(win, options.timeout || __WEBPACK_IMPORTED_MODULE_3__conf__.a.CHILD_WINDOW_TIMEOUT);
                     }).then(function() {
                         var _ref = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {}, origin = _ref.origin;
-                        if (Object(__WEBPACK_IMPORTED_MODULE_5__lib__.e)(domain) && !origin) return Object(__WEBPACK_IMPORTED_MODULE_5__lib__.n)(win);
+                        if (Object(__WEBPACK_IMPORTED_MODULE_5__lib__.e)(domain) && !origin) return Object(__WEBPACK_IMPORTED_MODULE_5__lib__.o)(win);
                     }).then(function() {
                         var _ref2 = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {}, origin = _ref2.origin;
                         if (Object(__WEBPACK_IMPORTED_MODULE_5__lib__.e)(domain)) {
@@ -3696,12 +3709,12 @@
                 }, listenerOptions);
                 if (options.once) {
                     var _handler = listenerOptions.handler;
-                    listenerOptions.handler = Object(__WEBPACK_IMPORTED_MODULE_2__lib__.l)(function() {
+                    listenerOptions.handler = Object(__WEBPACK_IMPORTED_MODULE_2__lib__.m)(function() {
                         requestListener.cancel();
                         return _handler.apply(this, arguments);
                     });
                 }
-                if (listenerOptions.window && options.errorOnClose) var interval = Object(__WEBPACK_IMPORTED_MODULE_2__lib__.m)(function() {
+                if (listenerOptions.window && options.errorOnClose) var interval = Object(__WEBPACK_IMPORTED_MODULE_2__lib__.n)(function() {
                     if (win && "object" === (void 0 === win ? "undefined" : _typeof(win)) && Object(__WEBPACK_IMPORTED_MODULE_0_cross_domain_utils_src__.isWindowClosed)(win)) {
                         interval.cancel();
                         listenerOptions.handleError(new Error("Post message target window is closed"));
@@ -8642,9 +8655,8 @@
         "./src/button/template.jsx": function(module, __webpack_exports__, __webpack_require__) {
             "use strict";
             function buttonTemplate(_ref) {
-                var props = _ref.props, currency = "", amount = "";
+                var props = _ref.props, amount = "";
                 if ("rai" === props.payment.currency) {
-                    currency = "";
                     amount = function(num) {
                         num = parseInt(num) / 1e3;
                         return num > Math.floor(num);
@@ -8652,15 +8664,15 @@
                 }
                 return Object(__WEBPACK_IMPORTED_MODULE_0_xcomponent_src_lib__.F)("div", {
                     class: "brainblocks-button-container"
-                }, Object(__WEBPACK_IMPORTED_MODULE_0_xcomponent_src_lib__.F)("style", null, "\n                    .brainblocks-button {\n                        display: inline-block;\n                        width: 100%;\n                        height: 50px;\n                        background-color: #eee;\n                        border-radius: 5px;\n                        font-family: Helvetica, Arial, sans-serif;\n                        line-height: 50px;\n                        color: #1A3238;\n                        cursor: pointer;\n                        font-size: 16px;\n                        text-align: center;\n                        letter-spacing: 1px;\n                    }\n                    \n                    .brainblocks-button-content {\n                        width: 100%;\n                        height: 50px;\n\n                        display: flex;\n                        flex-direction: row;\n                        justify-content: center;\n                        align-items: center;\n                    }\n\n                    .brainblocks-button .brainblocks-logo {\n                        height: 20px;\n                        margin-right: 10px;\n                        border-right: 1px solid #ccc;\n                        padding-right: 10px;\n                        vertical-align: middle;\n                    }\n\n                    .brainblocks-button .brainblocks-raiblocks-logo {\n                        height: 10px;\n                        margin-left: 10px;\n                        border-left: 1px solid #ccc;\n                        padding: 5px 0 5px 10px;\n                    }\n\n                    .brainblocks-button .brainblocks-raiblocks-logo-small {\n                        height: 10px;\n                        margin-left: 5px;\n                        border-left: 1px solid #ccc;\n                        padding: 5px 0 5px 5px;\n                        display: none;\n                    }\n\n                    @media screen and (max-width: 299px) {\n                        .brainblocks-button .pay-text {\n                            display: none;\n                        }\n                    }\n\n                    @media screen and (max-width: 200px) {\n                        .brainblocks-button .brainblocks-raiblocks-logo {\n                            display: none;\n                        }\n\n                        .brainblocks-button .brainblocks-raiblocks-logo-small {\n                            display: inline-block;\n                        }\n                    }\n                "), Object(__WEBPACK_IMPORTED_MODULE_0_xcomponent_src_lib__.F)("div", {
+                }, Object(__WEBPACK_IMPORTED_MODULE_0_xcomponent_src_lib__.F)("style", null, "\n                    .brainblocks-button {\n                        display: inline-block;\n                        width: 100%;\n                        height: 50px;\n                        background-color: #eee;\n                        border-radius: 20px;\n                        font-family: Helvetica, Arial, sans-serif;\n                        line-height: 50px;\n                        color: #1A3238;\n                        cursor: pointer;\n                        font-size: 16px;\n                        text-align: center;\n                        letter-spacing: 1px;\n                    }\n                    \n                    .brainblocks-button-content {\n                        width: 100%;\n                        height: 50px;\n                        display: flex;\n                        flex-direction: row;\n                        justify-content: center;\n                        align-items: center;\n                    }\n\n                    .brainblocks-button .nano-logo {\n                        height: 20px;\n                        float: left;\n                        padding-right: 15px;\n                        border-right: 2px solid #ccc;\n                    }\n\n                    .brainblocks-button .pay-text {\n                        margin-left: 15px;\n                    }\n\n                    .brainblocks-button .pay-amount {\n                        font-weight: bold;\n                    }\n\n                    .brainblocks-button .pay-currency {\n                        font-weight: bold;\n                    }\n\n                    @media screen and (max-width: 299px) {\n                        .brainblocks-button .pay-text {\n                            display: none;\n                        }\n                    }\n\n                    @media screen and (max-width: 200px) {\n                        .brainblocks-button .brainblocks-raiblocks-logo {\n                            display: none;\n                        }\n\n                        .brainblocks-button .brainblocks-raiblocks-logo-small {\n                            display: inline-block;\n                        }\n                    }\n                "), Object(__WEBPACK_IMPORTED_MODULE_0_xcomponent_src_lib__.F)("div", {
                     role: "button",
                     class: "brainblocks-button"
                 }, Object(__WEBPACK_IMPORTED_MODULE_0_xcomponent_src_lib__.F)("div", {
                     class: "brainblocks-button-content"
-                }, Object(__WEBPACK_IMPORTED_MODULE_0_xcomponent_src_lib__.F)("span", null, Object(__WEBPACK_IMPORTED_MODULE_0_xcomponent_src_lib__.F)("img", {
-                    class: "brainblocks-logo",
-                    src: "https://brainblocks.io/static/img/brainblocks_logo.svg"
-                }), Object(__WEBPACK_IMPORTED_MODULE_0_xcomponent_src_lib__.F)("span", {
+                }, Object(__WEBPACK_IMPORTED_MODULE_0_xcomponent_src_lib__.F)("img", {
+                    class: "nano-logo",
+                    src: "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjxzdmcgaWQ9IkxheWVyXzEiIHZpZXdCb3g9IjAgMCA2NyAyOSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4NCiAgPHN0eWxlPi5zdDB7ZmlsbDojNGE5MGUyfS5zdDF7ZmlsbDojMDAwMDM0fTwvc3R5bGU+DQogIDxjaXJjbGUgY2xhc3M9InN0MCIgY3g9IjQuOCIgY3k9IjI0LjQiIHI9IjQuOCIvPg0KICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNNjIgLjZjLTIuNiAwLTQuOCAyLjEtNC44IDQuOCAwIDMuOC0uNiA0LjgtNC44IDQuOEg1MmMtMi40LjItNC4zIDIuMi00LjMgNC43di4xYzAgMy43LS43IDQuNi00LjggNC42LS4yIDAtLjQgMC0uNS4xLTIuNC4zLTQuMyAyLjMtNC4zIDQuNyAwIDIuNiAyLjEgNC44IDQuOCA0LjggMi41IDAgNC42LTIgNC43LTQuNHYtLjRjMC0zLjQgMS4xLTQuNyA0LjctNC44aC4xYzIuNSAwIDQuNi0yIDQuNy00LjV2LS4zYzAtMy41IDEuMS00LjggNC44LTQuOCAyLjYgMCA0LjgtMi4xIDQuOC00LjggMC0yLjUtMi4xLTQuNi00LjctNC42ek0zMy44IDEwLjJoLS40Yy00LjIgMC00LjgtMS00LjgtNC44IDAtMi42LTIuMS00LjgtNC44LTQuOEMyMS4yLjYgMTkgMi43IDE5IDUuNGMwIDMuOC0uNiA0LjctNC44IDQuN2gtLjRjLTIuNC4yLTQuMyAyLjItNC4zIDQuNyAwIDIuNiAyLjEgNC44IDQuOCA0LjggMi41IDAgNC42LTIgNC43LTQuNHYtLjNjMC0zLjUgMS4xLTQuOCA0LjgtNC44IDMuNyAwIDQuOCAxLjMgNC44IDQuNyAwIDIuNiAyLjEgNC44IDQuOCA0LjhzNC44LTIuMSA0LjgtNC44Yy0uMS0yLjQtMi00LjQtNC40LTQuNnoiLz4NCjwvc3ZnPg=="
+                }), Object(__WEBPACK_IMPORTED_MODULE_0_xcomponent_src_lib__.F)("span", null, Object(__WEBPACK_IMPORTED_MODULE_0_xcomponent_src_lib__.F)("span", {
                     class: "pay-text"
                 }, amount && "Pay "), Object(__WEBPACK_IMPORTED_MODULE_0_xcomponent_src_lib__.F)("span", null, Object(__WEBPACK_IMPORTED_MODULE_0_xcomponent_src_lib__.F)("span", {
                     id: "pay-amount",
@@ -8671,13 +8683,7 @@
                 })), Object(__WEBPACK_IMPORTED_MODULE_0_xcomponent_src_lib__.F)("span", null, " "), Object(__WEBPACK_IMPORTED_MODULE_0_xcomponent_src_lib__.F)("span", {
                     id: "pay-currency",
                     class: "pay-currency"
-                }, currency))), Object(__WEBPACK_IMPORTED_MODULE_0_xcomponent_src_lib__.F)("img", {
-                    class: "brainblocks-raiblocks-logo",
-                    src: "data:image/svg+xml;base64,DQo8c3ZnIGlkPSJMYXllcl8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMTYgMjkuNCI+PHN0eWxlPi5zdDB7ZmlsbDojNGE5MGUyfS5zdDF7ZmlsbDojMDAwMDM0fTwvc3R5bGU+PGNpcmNsZSBjbGFzcz0ic3QwIiBjeD0iNC44IiBjeT0iMjQuNCIgcj0iNC44Ii8+PHBhdGggY2xhc3M9InN0MCIgZD0iTTYyIC42Yy0yLjYgMC00LjggMi4xLTQuOCA0LjggMCAzLjgtLjYgNC44LTQuOCA0LjhINTJjLTIuNC4yLTQuMyAyLjItNC4zIDQuN3YuMWMwIDMuNy0uNyA0LjYtNC44IDQuNi0uMiAwLS40IDAtLjUuMS0yLjQuMy00LjMgMi4zLTQuMyA0LjcgMCAyLjYgMi4xIDQuOCA0LjggNC44IDIuNSAwIDQuNi0yIDQuNy00LjR2LS40YzAtMy40IDEuMS00LjcgNC43LTQuOGguMWMyLjUgMCA0LjYtMiA0LjctNC41di0uM2MwLTMuNSAxLjEtNC44IDQuOC00LjggMi42IDAgNC44LTIuMSA0LjgtNC44IDAtMi41LTIuMS00LjYtNC43LTQuNnpNMzMuOCAxMC4yaC0uNGMtNC4yIDAtNC44LTEtNC44LTQuOCAwLTIuNi0yLjEtNC44LTQuOC00LjhDMjEuMi42IDE5IDIuNyAxOSA1LjRjMCAzLjgtLjYgNC43LTQuOCA0LjdoLS40Yy0yLjQuMi00LjMgMi4yLTQuMyA0LjcgMCAyLjYgMi4xIDQuOCA0LjggNC44IDIuNSAwIDQuNi0yIDQuNy00LjR2LS4zYzAtMy41IDEuMS00LjggNC44LTQuOCAzLjcgMCA0LjggMS4zIDQuOCA0LjcgMCAyLjYgMi4xIDQuOCA0LjggNC44czQuOC0yLjEgNC44LTQuOGMtLjEtMi40LTItNC40LTQuNC00LjZ6Ii8+PGc+PHBhdGggY2xhc3M9InN0MSIgZD0iTTEwOS4zLjhjLS4zIDAtLjYuMS0uOC40LS4yLjItLjMuNS0uMy45VjI1TDkwLjcgMS40Yy0uMy0uNC0uNi0uNi0xLS42cy0uNy4xLS45LjRjLS4yLjItLjMuNS0uMy45djI2YzAgLjQuMS43LjMuOS4yLjIuNS4zLjkuMy4zIDAgLjYtLjEuOC0uNC4yLS4yLjMtLjUuMy0uOVY1LjJsMTcuNSAyMy42Yy4zLjQuNy42IDEuMS42LjQgMCAuNy0uMS45LS40LjItLjIuMy0uNS4zLS45di0yNmMwLS40LS4xLS43LS4zLS45LS4zLS4zLS42LS40LTEtLjR6bTkyLS44Yy04LjEgMC0xNC43IDYuNi0xNC43IDE0LjdzNi42IDE0LjcgMTQuNyAxNC43UzIxNiAyMi44IDIxNiAxNC43IDIwOS40IDAgMjAxLjMgMHptMCAyN2MtNi44IDAtMTIuMy01LjUtMTIuMy0xMi4zczUuNS0xMi4zIDEyLjMtMTIuMyAxMi4zIDUuNSAxMi4zIDEyLjNTMjA4LjEgMjcgMjAxLjMgMjd6TTE3NyAuOGMtLjMgMC0uNi4xLS44LjQtLjIuMi0uMy41LS4zLjlWMjVMMTU4LjQgMS40Yy0uMy0uNC0uNi0uNi0xLS42cy0uNy4xLS45LjRjLS4yLjItLjMuNS0uMy45djI2YzAgLjQuMS43LjMuOS4yLjIuNS4zLjkuMy4zIDAgLjYtLjEuOC0uNC4yLS4yLjMtLjUuMy0uOVY1LjJMMTc2IDI4LjhjLjMuNC43LjYgMS4xLjYuNCAwIC43LS4xLjktLjQuMi0uMi4zLS41LjMtLjl2LTI2YzAtLjQtLjEtLjctLjMtLjktLjMtLjMtLjYtLjQtMS0uNHptLTQyLjMuOGMtLjEtLjMtLjMtLjUtLjUtLjYtLjMtLjItLjUtLjItLjgtLjItLjYgMC0xLjEuMy0xLjMuOWwtMTEuNyAyNi4yYy0uMS4xLS4xLjMtLjEuNCAwIC4zLjEuNi4zLjguMi4yLjUuMy44LjMuNSAwIC45LS4zIDEuMS0uOGwzLjEtN2gxNS41bDMgN2MuMS4yLjMuNC41LjYuMi4xLjQuMi42LjIuMyAwIC42LS4xLjgtLjMuMi0uMi40LS40LjQtLjcgMC0uMiAwLS4zLS4xLS41TDEzNC43IDEuNnptLTguMiAxNy45TDEzMy4zIDRsNi44IDE1LjVoLTEzLjZ6Ii8+PC9nPjwvc3ZnPg=="
-                }), Object(__WEBPACK_IMPORTED_MODULE_0_xcomponent_src_lib__.F)("img", {
-                    class: "brainblocks-raiblocks-logo-small",
-                    src: "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjxzdmcgaWQ9IkxheWVyXzEiIHZpZXdCb3g9IjAgMCA2NyAyOSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4NCiAgPHN0eWxlPi5zdDB7ZmlsbDojNGE5MGUyfS5zdDF7ZmlsbDojMDAwMDM0fTwvc3R5bGU+DQogIDxjaXJjbGUgY2xhc3M9InN0MCIgY3g9IjQuOCIgY3k9IjI0LjQiIHI9IjQuOCIvPg0KICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNNjIgLjZjLTIuNiAwLTQuOCAyLjEtNC44IDQuOCAwIDMuOC0uNiA0LjgtNC44IDQuOEg1MmMtMi40LjItNC4zIDIuMi00LjMgNC43di4xYzAgMy43LS43IDQuNi00LjggNC42LS4yIDAtLjQgMC0uNS4xLTIuNC4zLTQuMyAyLjMtNC4zIDQuNyAwIDIuNiAyLjEgNC44IDQuOCA0LjggMi41IDAgNC42LTIgNC43LTQuNHYtLjRjMC0zLjQgMS4xLTQuNyA0LjctNC44aC4xYzIuNSAwIDQuNi0yIDQuNy00LjV2LS4zYzAtMy41IDEuMS00LjggNC44LTQuOCAyLjYgMCA0LjgtMi4xIDQuOC00LjggMC0yLjUtMi4xLTQuNi00LjctNC42ek0zMy44IDEwLjJoLS40Yy00LjIgMC00LjgtMS00LjgtNC44IDAtMi42LTIuMS00LjgtNC44LTQuOEMyMS4yLjYgMTkgMi43IDE5IDUuNGMwIDMuOC0uNiA0LjctNC44IDQuN2gtLjRjLTIuNC4yLTQuMyAyLjItNC4zIDQuNyAwIDIuNiAyLjEgNC44IDQuOCA0LjggMi41IDAgNC42LTIgNC43LTQuNHYtLjNjMC0zLjUgMS4xLTQuOCA0LjgtNC44IDMuNyAwIDQuOCAxLjMgNC44IDQuNyAwIDIuNiAyLjEgNC44IDQuOCA0LjhzNC44LTIuMSA0LjgtNC44Yy0uMS0yLjQtMi00LjQtNC40LTQuNnoiLz4NCjwvc3ZnPg=="
-                }))));
+                }, "NANO"))))));
             }
             __webpack_exports__.a = buttonTemplate;
             var __WEBPACK_IMPORTED_MODULE_0_xcomponent_src_lib__ = __webpack_require__("./node_modules/xcomponent/src/lib/index.js");
