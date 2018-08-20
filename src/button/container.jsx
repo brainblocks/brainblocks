@@ -38,10 +38,21 @@ export function containerTemplate({ id, tag, context, CLASS, outlet, jsxDom, dim
                     #${ id } > .${ CLASS.OUTLET } > iframe.${ CLASS.INVISIBLE } {
                         opacity: 0;
                     }
+
+                    #${ id } #paypal-button {
+                        margin-top: 10px;
+                        border-top: 1px solid #eeee;
+                        padding-top: 15px;
+                    }
                 `}
             </style>
 
             { outlet }
+
+            {
+                props.payment.paypal_email &&
+                    <div id="paypal-button"></div>
+            }
         </div>
     );
 }
