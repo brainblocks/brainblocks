@@ -43,6 +43,7 @@ export function containerTemplate({ id, tag, context, CLASS, outlet, jsxDom, dim
                         margin-top: 10px;
                         border-top: 1px solid #eeee;
                         padding-top: 15px;
+                        width: ${ props.style.size === 'responsive' ? '100%' : width };
                     }
                 `}
             </style>
