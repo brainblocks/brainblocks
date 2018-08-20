@@ -51,8 +51,8 @@ export function containerTemplate({ id, tag, context, CLASS, outlet, jsxDom, dim
             { outlet }
 
             {
-                props.payment.paypal_email &&
-                    <div id="paypal-button"></div>
+                props.payment.paypal_email ?
+                    <div id="paypal-button"></div> : <span></span>
             }
         </div>
     );
