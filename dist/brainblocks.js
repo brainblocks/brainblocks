@@ -257,11 +257,12 @@
                 transport = newTransport;
             }
             function print(level, event, payload) {
-                if (!loaded) return setTimeout(function() {
-                    return print(level, event, payload);
-                }, 1);
-                if (window.console && window.console.log) {
-                    var logLevel = window.LOG_LEVEL || __WEBPACK_IMPORTED_MODULE_2__config__.a.logLevel;
+                if ("undefined" != typeof window && window.console && window.console.log) {
+                    if (!loaded) return setTimeout(function() {
+                        return print(level, event, payload);
+                    }, 1);
+                    var logLevel = __WEBPACK_IMPORTED_MODULE_2__config__.a.logLevel;
+                    window.LOG_LEVEL && (logLevel = window.LOG_LEVEL);
                     if (!(__WEBPACK_IMPORTED_MODULE_2__config__.b.indexOf(level) > __WEBPACK_IMPORTED_MODULE_2__config__.b.indexOf(logLevel))) {
                         payload = payload || {};
                         var args = [ event ];
@@ -276,7 +277,7 @@
             }
             function immediateFlush() {
                 var _ref = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {}, _ref$fireAndForget = _ref.fireAndForget, fireAndForget = void 0 !== _ref$fireAndForget && _ref$fireAndForget;
-                if (__WEBPACK_IMPORTED_MODULE_2__config__.a.uri) {
+                if ("undefined" != typeof window && __WEBPACK_IMPORTED_MODULE_2__config__.a.uri) {
                     var hasBuffer = buffer.length, hasTracking = tracking.length;
                     if (hasBuffer || hasTracking) {
                         for (var meta = {}, _iterator = __WEBPACK_IMPORTED_MODULE_1__builders__.f, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator](); ;) {
@@ -335,38 +336,40 @@
                 __WEBPACK_IMPORTED_MODULE_2__config__.a.autoLog.indexOf(level) > -1 && _flush();
             }
             function log(level, event, payload) {
-                __WEBPACK_IMPORTED_MODULE_2__config__.a.prefix && (event = __WEBPACK_IMPORTED_MODULE_2__config__.a.prefix + "_" + event);
-                payload = payload || {};
-                "string" == typeof payload ? payload = {
-                    message: payload
-                } : payload instanceof Error && (payload = {
-                    error: payload.stack || payload.toString()
-                });
-                try {
-                    JSON.stringify(payload);
-                } catch (err) {
-                    return;
-                }
-                payload.timestamp = Date.now();
-                for (var _iterator3 = __WEBPACK_IMPORTED_MODULE_1__builders__.g, _isArray3 = Array.isArray(_iterator3), _i3 = 0, _iterator3 = _isArray3 ? _iterator3 : _iterator3[Symbol.iterator](); ;) {
-                    var _ref4;
-                    if (_isArray3) {
-                        if (_i3 >= _iterator3.length) break;
-                        _ref4 = _iterator3[_i3++];
-                    } else {
-                        _i3 = _iterator3.next();
-                        if (_i3.done) break;
-                        _ref4 = _i3.value;
-                    }
-                    var builder = _ref4;
+                if ("undefined" != typeof window) {
+                    __WEBPACK_IMPORTED_MODULE_2__config__.a.prefix && (event = __WEBPACK_IMPORTED_MODULE_2__config__.a.prefix + "_" + event);
+                    payload = payload || {};
+                    "string" == typeof payload ? payload = {
+                        message: payload
+                    } : payload instanceof Error && (payload = {
+                        error: payload.stack || payload.toString()
+                    });
                     try {
-                        Object(__WEBPACK_IMPORTED_MODULE_0__util__.b)(payload, builder(payload), !1);
+                        JSON.stringify(payload);
                     } catch (err) {
-                        console.error("Error in custom payload builder:", err.stack || err.toString());
+                        return;
                     }
+                    payload.timestamp = Date.now();
+                    for (var _iterator3 = __WEBPACK_IMPORTED_MODULE_1__builders__.g, _isArray3 = Array.isArray(_iterator3), _i3 = 0, _iterator3 = _isArray3 ? _iterator3 : _iterator3[Symbol.iterator](); ;) {
+                        var _ref4;
+                        if (_isArray3) {
+                            if (_i3 >= _iterator3.length) break;
+                            _ref4 = _iterator3[_i3++];
+                        } else {
+                            _i3 = _iterator3.next();
+                            if (_i3.done) break;
+                            _ref4 = _i3.value;
+                        }
+                        var builder = _ref4;
+                        try {
+                            Object(__WEBPACK_IMPORTED_MODULE_0__util__.b)(payload, builder(payload), !1);
+                        } catch (err) {
+                            console.error("Error in custom payload builder:", err.stack || err.toString());
+                        }
+                    }
+                    __WEBPACK_IMPORTED_MODULE_2__config__.a.silent || print(level, event, payload);
+                    buffer.length === __WEBPACK_IMPORTED_MODULE_2__config__.a.sizeLimit ? enqueue("info", "logger_max_buffer_length") : buffer.length < __WEBPACK_IMPORTED_MODULE_2__config__.a.sizeLimit && enqueue(level, event, payload);
                 }
-                __WEBPACK_IMPORTED_MODULE_2__config__.a.silent || print(level, event, payload);
-                buffer.length === __WEBPACK_IMPORTED_MODULE_2__config__.a.sizeLimit ? enqueue("info", "logger_max_buffer_length") : buffer.length < __WEBPACK_IMPORTED_MODULE_2__config__.a.sizeLimit && enqueue(level, event, payload);
             }
             function prefix(name) {
                 return {
@@ -403,7 +406,7 @@
                 return log("error", event, payload);
             }
             function _track(payload) {
-                if (payload) {
+                if ("undefined" != typeof window && payload) {
                     try {
                         JSON.stringify(payload);
                     } catch (err) {
@@ -452,21 +455,13 @@
             __webpack_exports__.g = info;
             __webpack_exports__.n = warn;
             __webpack_exports__.c = error;
-            var __WEBPACK_IMPORTED_MODULE_0__util__ = __webpack_require__("./node_modules/beaver-logger/client/util.js"), __WEBPACK_IMPORTED_MODULE_1__builders__ = __webpack_require__("./node_modules/beaver-logger/client/builders.js"), __WEBPACK_IMPORTED_MODULE_2__config__ = __webpack_require__("./node_modules/beaver-logger/client/config.js"), _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(obj) {
-                return typeof obj;
-            } : function(obj) {
-                return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-            }, buffer = [], tracking = [];
-            Function.prototype.bind && window.console && "object" === _typeof(console.log) && [ "log", "info", "warn", "error" ].forEach(function(method) {
-                console[method] = this.bind(console[method], console);
-            }, Function.prototype.call);
-            var transport = function(headers, data, options) {
+            var __WEBPACK_IMPORTED_MODULE_0__util__ = __webpack_require__("./node_modules/beaver-logger/client/util.js"), __WEBPACK_IMPORTED_MODULE_1__builders__ = __webpack_require__("./node_modules/beaver-logger/client/builders.js"), __WEBPACK_IMPORTED_MODULE_2__config__ = __webpack_require__("./node_modules/beaver-logger/client/config.js"), buffer = [], tracking = [], transport = function(headers, data, options) {
                 return Object(__WEBPACK_IMPORTED_MODULE_0__util__.a)("post", __WEBPACK_IMPORTED_MODULE_2__config__.a.uri, headers, data, options);
             }, loaded = !1;
             setTimeout(function() {
                 loaded = !0;
             }, 1);
-            var _flush = Object(__WEBPACK_IMPORTED_MODULE_0__util__.d)(immediateFlush, __WEBPACK_IMPORTED_MODULE_2__config__.a.debounceInterval);
+            var _flush = Object(__WEBPACK_IMPORTED_MODULE_0__util__.e)(immediateFlush, __WEBPACK_IMPORTED_MODULE_2__config__.a.debounceInterval);
         },
         "./node_modules/beaver-logger/client/performance.js": function(module, __webpack_exports__, __webpack_require__) {
             "use strict";
@@ -493,7 +488,7 @@
             }
             function initHeartBeat() {
                 var heartBeatTimer = timer(), heartbeatCount = 0;
-                Object(__WEBPACK_IMPORTED_MODULE_3__util__.e)(function() {
+                Object(__WEBPACK_IMPORTED_MODULE_3__util__.f)(function() {
                     if (!(__WEBPACK_IMPORTED_MODULE_0__config__.a.heartbeatMaxThreshold && heartbeatCount > __WEBPACK_IMPORTED_MODULE_0__config__.a.heartbeatMaxThreshold)) {
                         heartbeatCount += 1;
                         var elapsed = heartBeatTimer.elapsed(), lag = elapsed - __WEBPACK_IMPORTED_MODULE_0__config__.a.heartbeatInterval, heartbeatPayload = {
@@ -520,7 +515,7 @@
                     enablePerformance && (payload.req_elapsed = reqTimer.elapsed());
                     return payload;
                 });
-                __WEBPACK_IMPORTED_MODULE_3__util__.g.then(function() {
+                Object(__WEBPACK_IMPORTED_MODULE_3__util__.d)().then(function() {
                     var keys = [ "connectEnd", "connectStart", "domComplete", "domContentLoadedEventEnd", "domContentLoadedEventStart", "domInteractive", "domLoading", "domainLookupEnd", "domainLookupStart", "fetchStart", "loadEventEnd", "loadEventStart", "navigationStart", "redirectEnd", "redirectStart", "requestStart", "responseEnd", "responseStart", "secureConnectionStart", "unloadEventEnd", "unloadEventStart" ], timing = {};
                     keys.forEach(function(key) {
                         timing[key] = parseInt(window.performance.timing[key], 10) || 0;
@@ -567,7 +562,7 @@
                 Object(__WEBPACK_IMPORTED_MODULE_1__logger__.f)();
                 startTime = currentTime;
                 currentState = toState;
-                pageID = Object(__WEBPACK_IMPORTED_MODULE_3__util__.f)();
+                pageID = Object(__WEBPACK_IMPORTED_MODULE_3__util__.g)();
             }
             function transition(toState) {
                 startTransition();
@@ -576,7 +571,7 @@
             __webpack_exports__.b = startTransition;
             __webpack_exports__.a = endTransition;
             __webpack_exports__.c = transition;
-            var __WEBPACK_IMPORTED_MODULE_0__performance__ = __webpack_require__("./node_modules/beaver-logger/client/performance.js"), __WEBPACK_IMPORTED_MODULE_1__logger__ = __webpack_require__("./node_modules/beaver-logger/client/logger.js"), __WEBPACK_IMPORTED_MODULE_2__builders__ = __webpack_require__("./node_modules/beaver-logger/client/builders.js"), __WEBPACK_IMPORTED_MODULE_3__util__ = __webpack_require__("./node_modules/beaver-logger/client/util.js"), __WEBPACK_IMPORTED_MODULE_4__config__ = __webpack_require__("./node_modules/beaver-logger/client/config.js"), windowID = Object(__WEBPACK_IMPORTED_MODULE_3__util__.f)(), pageID = Object(__WEBPACK_IMPORTED_MODULE_3__util__.f)(), currentState = __WEBPACK_IMPORTED_MODULE_4__config__.a.initial_state_name, startTime = void 0;
+            var __WEBPACK_IMPORTED_MODULE_0__performance__ = __webpack_require__("./node_modules/beaver-logger/client/performance.js"), __WEBPACK_IMPORTED_MODULE_1__logger__ = __webpack_require__("./node_modules/beaver-logger/client/logger.js"), __WEBPACK_IMPORTED_MODULE_2__builders__ = __webpack_require__("./node_modules/beaver-logger/client/builders.js"), __WEBPACK_IMPORTED_MODULE_3__util__ = __webpack_require__("./node_modules/beaver-logger/client/util.js"), __WEBPACK_IMPORTED_MODULE_4__config__ = __webpack_require__("./node_modules/beaver-logger/client/config.js"), windowID = Object(__WEBPACK_IMPORTED_MODULE_3__util__.g)(), pageID = Object(__WEBPACK_IMPORTED_MODULE_3__util__.g)(), currentState = __WEBPACK_IMPORTED_MODULE_4__config__.a.initial_state_name, startTime = void 0;
             Object(__WEBPACK_IMPORTED_MODULE_2__builders__.c)(function() {
                 return {
                     windowID: windowID,
@@ -651,6 +646,12 @@
                     return debounce.promise;
                 };
             }
+            function onWindowReady() {
+                return new __WEBPACK_IMPORTED_MODULE_0_zalgo_promise_src__.a(function(resolve) {
+                    "undefined" != typeof document && "complete" === document.readyState && resolve();
+                    window.addEventListener("load", resolve);
+                });
+            }
             function safeInterval(method, time) {
                 function loop() {
                     timeout = setTimeout(function() {
@@ -677,17 +678,12 @@
             }
             __webpack_exports__.b = extend;
             __webpack_exports__.a = ajax;
-            __webpack_exports__.d = promiseDebounce;
-            __webpack_require__.d(__webpack_exports__, "g", function() {
-                return windowReady;
-            });
-            __webpack_exports__.e = safeInterval;
-            __webpack_exports__.f = uniqueID;
+            __webpack_exports__.e = promiseDebounce;
+            __webpack_exports__.d = onWindowReady;
+            __webpack_exports__.f = safeInterval;
+            __webpack_exports__.g = uniqueID;
             __webpack_exports__.c = isIE;
-            var __WEBPACK_IMPORTED_MODULE_0_zalgo_promise_src__ = __webpack_require__("./node_modules/zalgo-promise/src/index.js"), windowReady = new __WEBPACK_IMPORTED_MODULE_0_zalgo_promise_src__.a(function(resolve) {
-                "undefined" != typeof document && "complete" === document.readyState && resolve();
-                window.addEventListener && window.addEventListener("load", resolve);
-            });
+            var __WEBPACK_IMPORTED_MODULE_0_zalgo_promise_src__ = __webpack_require__("./node_modules/zalgo-promise/src/index.js");
         },
         "./node_modules/cross-domain-safe-weakmap/src/index.js": function(module, __webpack_exports__, __webpack_require__) {
             "use strict";
@@ -977,6 +973,7 @@
                 return !1;
             }
             function getActualDomain(win) {
+                win = win || window;
                 var location = win.location;
                 if (!location) throw new Error("Can not read window location");
                 var protocol = location.protocol;
@@ -8550,13 +8547,13 @@
             __webpack_require__.d(__webpack_exports__, "a", function() {
                 return Button;
             });
-            var __WEBPACK_IMPORTED_MODULE_0_xcomponent_src__ = __webpack_require__("./node_modules/xcomponent/src/index.js"), __WEBPACK_IMPORTED_MODULE_1__template__ = __webpack_require__("./src/button/template.jsx"), __WEBPACK_IMPORTED_MODULE_2__container__ = __webpack_require__("./src/button/container.jsx"), __WEBPACK_IMPORTED_MODULE_3__config__ = __webpack_require__("./src/config.js"), _extends = Object.assign || function(target) {
+            var __WEBPACK_IMPORTED_MODULE_0_zalgo_promise_src__ = __webpack_require__("./node_modules/zalgo-promise/src/index.js"), __WEBPACK_IMPORTED_MODULE_1_xcomponent_src__ = __webpack_require__("./node_modules/xcomponent/src/index.js"), __WEBPACK_IMPORTED_MODULE_2__template__ = __webpack_require__("./src/button/template.jsx"), __WEBPACK_IMPORTED_MODULE_3__container__ = __webpack_require__("./src/button/container.jsx"), __WEBPACK_IMPORTED_MODULE_4__config__ = __webpack_require__("./src/config.js"), _extends = Object.assign || function(target) {
                 for (var i = 1; i < arguments.length; i++) {
                     var source = arguments[i];
                     for (var key in source) Object.prototype.hasOwnProperty.call(source, key) && (target[key] = source[key]);
                 }
                 return target;
-            }, Button = Object(__WEBPACK_IMPORTED_MODULE_0_xcomponent_src__.a)({
+            }, Button = Object(__WEBPACK_IMPORTED_MODULE_1_xcomponent_src__.a)({
                 tag: "brainblocks-button",
                 defaultEnv: "production",
                 url: {
@@ -8564,14 +8561,14 @@
                     local: "http://localhost:8000/button",
                     production: "https://brainblocks.io/button"
                 },
+                dimensions: {
+                    width: "300px",
+                    height: "50px"
+                },
                 domain: {
                     test: "mock://www.my-site.com",
                     local: "http://localhost:8000",
                     production: "https://brainblocks.io"
-                },
-                dimensions: {
-                    width: "300px",
-                    height: "50px"
                 },
                 props: {
                     logLevel: {
@@ -8586,6 +8583,42 @@
                             return {};
                         }
                     },
+                    renderPayPal: {
+                        type: "function",
+                        required: !1,
+                        get value() {
+                            return function(_ref) {
+                                var client = _ref.client, style = _ref.style, commit = _ref.commit, _payment = _ref.payment, _onAuthorize = _ref.onAuthorize;
+                                return new __WEBPACK_IMPORTED_MODULE_0_zalgo_promise_src__.a(function(resolve, reject) {
+                                    if (window.paypal && window.paypal.Button) return resolve();
+                                    var script = document.createElement("script");
+                                    script.src = "https://www.paypalobjects.com/api/checkout.min.js";
+                                    script.onload = resolve;
+                                    script.onerror = reject;
+                                    if (!document.body) throw new Error("No document.body found");
+                                    document.body.appendChild(script);
+                                }).then(function() {
+                                    return window.paypal.Button.render({
+                                        client: client,
+                                        style: style,
+                                        commit: commit,
+                                        payment: function(data, actions) {
+                                            return _payment(data, {
+                                                payment: actions.payment,
+                                                order: actions.order
+                                            });
+                                        },
+                                        onAuthorize: function(data, actions) {
+                                            return _onAuthorize(data, {
+                                                payment: actions.payment,
+                                                order: actions.order
+                                            });
+                                        }
+                                    }, "#paypal-button");
+                                }).then(function() {});
+                            };
+                        }
+                    },
                     payment: {
                         type: "object",
                         required: !0,
@@ -8593,9 +8626,10 @@
                             if (!payment.destination) throw new Error("Expected payment.destination");
                             if (!payment.destination.match(/((?:xrb_[13][a-km-zA-HJ-NP-Z0-9]{59})|(?:nano_[13][a-km-zA-HJ-NP-Z0-9]{59}))/)) throw new Error("Invalid nano address: " + payment.destination);
                             if (!payment.currency) throw new Error("Expected payment.currency");
-                            if ("rai" !== payment.currency && -1 === __WEBPACK_IMPORTED_MODULE_3__config__.a.indexOf(payment.currency)) throw new Error("Expected payment.currency to be rai or " + __WEBPACK_IMPORTED_MODULE_3__config__.a.join(", ") + ", got " + payment.currency);
+                            if ("rai" !== payment.currency && -1 === __WEBPACK_IMPORTED_MODULE_4__config__.a.indexOf(payment.currency)) throw new Error("Expected payment.currency to be rai or " + __WEBPACK_IMPORTED_MODULE_4__config__.a.join(", ") + ", got " + payment.currency);
                             if (!payment.amount) throw new Error("Expected payment.amount");
                             if (!payment.amount.toString().match(/^\d+(\.\d+)?$/)) throw new Error("Expected payment.mount to be a number, got " + payment.amount);
+                            if (payment.paypal_email && ("rai" === payment.currency || "nano" === payment.currency)) throw new Error("Can only use PayPal with non-nano currency");
                         },
                         decorate: function(payment) {
                             return _extends({}, payment, {
@@ -8621,13 +8655,13 @@
                     iframe: !0,
                     popup: !1
                 },
-                prerenderTemplate: function(_ref) {
-                    var jsxDom = _ref.jsxDom, props = _ref.props;
-                    return jsxDom("html", null, jsxDom("head", null, jsxDom("style", null, "\n                            html, body {\n                                border: 0;\n                                padding: 0;\n                                margin: 0;\n                            }\n                        ")), jsxDom("body", null, Object(__WEBPACK_IMPORTED_MODULE_1__template__.a)({
+                prerenderTemplate: function(_ref2) {
+                    var jsxDom = _ref2.jsxDom, props = _ref2.props;
+                    return jsxDom("html", null, jsxDom("head", null, jsxDom("style", null, "\n                            html, body {\n                                border: 0;\n                                padding: 0;\n                                margin: 0;\n                            }\n                        ")), jsxDom("body", null, Object(__WEBPACK_IMPORTED_MODULE_2__template__.a)({
                         props: props
                     })));
                 },
-                containerTemplate: __WEBPACK_IMPORTED_MODULE_2__container__.a
+                containerTemplate: __WEBPACK_IMPORTED_MODULE_3__container__.a
             });
         },
         "./src/button/container.jsx": function(module, __webpack_exports__, __webpack_require__) {
@@ -8637,7 +8671,9 @@
                 return jsxDom("div", {
                     id: id,
                     class: CLASS.XCOMPONENT + " " + CLASS.XCOMPONENT + "-tag-" + tag + " " + CLASS.XCOMPONENT + "-context-" + context
-                }, jsxDom("style", null, "\n                    #" + id + ", #" + id + " > ." + CLASS.OUTLET + " {\n                        transition: height 0.5s ease-in-out;\n                    }\n\n                    #" + id + " > ." + CLASS.OUTLET + " {\n                        display: inline-block;\n                        max-width: 500px;\n                        min-width: 150px;\n                        width: " + ("responsive" === props.style.size ? "100%" : width) + ";\n                        height: " + height + ";\n                        display: inline-block;\n                        position: relative;\n                        transition: height 0.5s ease-in-out;\n                    }\n\n                    #" + id + " > ." + CLASS.OUTLET + " > iframe {\n                        height: 100%;\n                        width: 100%;\n                        position: absolute;\n                        top: 0;\n                        left: 0;\n                        transition: opacity .2s ease-in-out;\n                    }\n\n                    #" + id + " > ." + CLASS.OUTLET + " > iframe." + CLASS.VISIBLE + " {\n                        opacity: 1;\n                    }\n\n                    #" + id + " > ." + CLASS.OUTLET + " > iframe." + CLASS.INVISIBLE + " {\n                        opacity: 0;\n                    }\n                "), outlet);
+                }, jsxDom("style", null, "\n                    #" + id + ", #" + id + " > ." + CLASS.OUTLET + " {\n                        transition: height 0.5s ease-in-out;\n                    }\n\n                    #" + id + " > ." + CLASS.OUTLET + " {\n                        display: inline-block;\n                        max-width: 500px;\n                        min-width: 150px;\n                        width: " + ("responsive" === props.style.size ? "100%" : width) + ";\n                        height: " + height + ";\n                        display: inline-block;\n                        position: relative;\n                        transition: height 0.5s ease-in-out;\n                    }\n\n                    #" + id + " > ." + CLASS.OUTLET + " > iframe {\n                        height: 100%;\n                        width: 100%;\n                        position: absolute;\n                        top: 0;\n                        left: 0;\n                        transition: opacity .2s ease-in-out;\n                    }\n\n                    #" + id + " > ." + CLASS.OUTLET + " > iframe." + CLASS.VISIBLE + " {\n                        opacity: 1;\n                    }\n\n                    #" + id + " > ." + CLASS.OUTLET + " > iframe." + CLASS.INVISIBLE + " {\n                        opacity: 0;\n                    }\n\n                    #" + id + " #paypal-button {\n                        margin-top: 10px;\n                        border-top: 1px solid #eeee;\n                        padding-top: 15px;\n                    }\n                "), outlet, props.payment.paypal_email && jsxDom("div", {
+                    id: "paypal-button"
+                }));
             }
             __webpack_exports__.a = containerTemplate;
         },
