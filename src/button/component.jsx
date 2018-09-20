@@ -18,7 +18,7 @@ export let Button = create({
     url: {
         test:       '/base/test/windows/button/index.htm',
         local:      'http://localhost:8000/button',
-        production: 'https://api.brainblocks.io/button'
+        production: 'https://brainblocks.io/button'
     },
 
     dimensions: {
@@ -29,7 +29,7 @@ export let Button = create({
     domain: {
         test:       'mock://www.my-site.com',
         local:      'http://localhost:8000',
-        production: 'https://api.brainblocks.io'
+        production: 'https://brainblocks.io'
     },
 
     props: {
