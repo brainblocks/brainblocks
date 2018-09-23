@@ -8693,7 +8693,15 @@
                     },
                     onComplete: {
                         type: "function",
-                        required: !0
+                        required: !0,
+                        decorate: function(original) {
+                            return function() {
+                                var _this = this, _arguments = arguments;
+                                return this.close().then(function() {
+                                    return original.apply(_this, _arguments);
+                                });
+                            };
+                        }
                     }
                 },
                 defaultContext: "popup",
@@ -8716,7 +8724,7 @@
                         return actions.focus();
                     },
                     class: CLASS.XCOMPONENT + " " + CLASS.XCOMPONENT + "-tag-" + tag + " " + CLASS.XCOMPONENT + "-context-" + context + " " + CLASS.XCOMPONENT + "-focus"
-                }, outlet, jsxDom("style", null, "\n                    #" + id + " {\n                        position: fixed;\n                        top: 0;\n                        left: 0;\n                        width: 100%;\n                        height: 100%;\n                        background-color: rgba(0, 0, 0, 0.8);\n                    }\n                    #" + id + " {\n                        cursor: pointer;\n                    }\n                    #" + id + " ." + CLASS.XCOMPONENT + "-close:hover {\n                        opacity: 1;\n                    }\n                    #" + id + " ." + CLASS.XCOMPONENT + "-close:before,\n                    #" + id + " ." + CLASS.XCOMPONENT + "-close:after {\n                        position: absolute;\n                        left: 8px;\n                        content: ' ';\n                        height: 16px;\n                        width: 2px;\n                        background-color: white;\n                    }\n                    #" + id + " ." + CLASS.XCOMPONENT + "-close:before {\n                        transform: rotate(45deg);\n                    }\n                    #" + id + " ." + CLASS.XCOMPONENT + "-close:after {\n                        transform: rotate(-45deg);\n                    }\n                "));
+                }, outlet, jsxDom("style", null, "\n                    #" + id + " {\n                        position: fixed;\n                        top: 0;\n                        left: 0;\n                        width: 100%;\n                        height: 100%;\n                        background-color: rgba(0, 0, 0, 0.8);\n                        z-index: 10000;\n                    }\n                    #" + id + " {\n                        cursor: pointer;\n                    }\n                    #" + id + " ." + CLASS.XCOMPONENT + "-close:hover {\n                        opacity: 1;\n                    }\n                    #" + id + " ." + CLASS.XCOMPONENT + "-close:before,\n                    #" + id + " ." + CLASS.XCOMPONENT + "-close:after {\n                        position: absolute;\n                        left: 8px;\n                        content: ' ';\n                        height: 16px;\n                        width: 2px;\n                        background-color: white;\n                    }\n                    #" + id + " ." + CLASS.XCOMPONENT + "-close:before {\n                        transform: rotate(45deg);\n                    }\n                    #" + id + " ." + CLASS.XCOMPONENT + "-close:after {\n                        transform: rotate(-45deg);\n                    }\n                "));
             }
             __webpack_exports__.a = containerTemplate;
         },

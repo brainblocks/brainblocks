@@ -39,7 +39,17 @@ export var NanoWallet = create({
 
         onComplete: {
             type: 'function',
-            required: true
+            required: true,
+            decorate: function decorate(original) {
+                return function decoratedOnComplete() {
+                    var _this = this,
+                        _arguments = arguments;
+
+                    return this.close().then(function () {
+                        return original.apply(_this, _arguments);
+                    });
+                };
+            }
         }
     },
 
