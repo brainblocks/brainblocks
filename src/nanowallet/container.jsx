@@ -23,6 +23,7 @@ export function containerTemplate({ id, tag, context, CLASS, outlet, actions, js
                         width: 100%;
                         height: 100%;
                         background-color: rgba(0, 0, 0, 0.8);
+                        z-index: 10000;
                     }
                     #${ id } {
                         cursor: pointer;
