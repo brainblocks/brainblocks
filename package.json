@@ -118,6 +118,7 @@
   "dependencies": {
     "beaver-logger": "^3.0.11",
     "post-robot": "^8.0.14",
-    "xcomponent": "^6.0.38"
+    "xcomponent": "^6.0.38",
+    "zalgo-promise": "^1.0.34"
   }
 }
