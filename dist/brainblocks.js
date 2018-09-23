@@ -8631,7 +8631,7 @@
             __webpack_require__.d(__webpack_exports__, "a", function() {
                 return SUPPORTED_CURRENCIES;
             });
-            var SUPPORTED_CURRENCIES = [ "aud", "brl", "cad", "chf", "clp", "cny", "czk", "dkk", "eur", "gbp", "hkd", "huf", "idr", "ils", "inr", "jpy", "krw", "mxn", "myr", "nok", "nzd", "php", "pkr", "pln", "rub", "sek", "sgd", "thb", "try", "twd", "vnd", "usd", "zar" ];
+            var SUPPORTED_CURRENCIES = [ "btc", "bch", "usd", "eur", "gbp", "jpy", "cad", "aud", "cny", "chf", "sek", "nzd", "krw", "aed", "afn", "all", "amd", "ang", "aoa", "ars", "awg", "azn", "bam", "bbd", "bdt", "bgn", "bhd", "bif", "bmd", "bnd", "bob", "brl", "bsd", "btn", "bwp", "bzd", "cdf", "clf", "clp", "cop", "crc", "cup", "cve", "czk", "djf", "dkk", "dop", "dzd", "egp", "etb", "fjd", "fkp", "gel", "ghs", "gip", "gmd", "gnf", "gtq", "gyd", "hkd", "hnl", "hrk", "htg", "huf", "idr", "ils", "inr", "iqd", "irr", "isk", "jep", "jmd", "jod", "kes", "kgs", "khr", "kmf", "kpw", "kwd", "kyd", "kzt", "lak", "lbp", "lkr", "lrd", "lsl", "lyd", "mad", "mdl", "mga", "mkd", "mmk", "mnt", "mop", "mru", "mur", "mvr", "mwk", "mxn", "myr", "mzn", "nad", "ngn", "nio", "nok", "npr", "omr", "pab", "pen", "pgk", "php", "pkr", "pln", "pyg", "qar", "ron", "rsd", "rub", "rwf", "sar", "sbd", "scr", "sdg", "sgd", "shp", "sll", "sos", "srd", "stn", "svc", "syp", "szl", "thb", "tjs", "tmt", "tnd", "top", "try", "ttd", "twd", "tzs", "uah", "ugx", "uyu", "uzs", "vef", "vnd", "vuv", "wst", "xaf", "xcd", "xof", "xpf", "yer", "zar", "zmw", "zwl", "xag", "xau" ];
         },
         "./src/index.js": function(module, __webpack_exports__, __webpack_require__) {
             "use strict";
