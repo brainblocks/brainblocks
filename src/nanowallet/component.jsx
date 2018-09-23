@@ -39,7 +39,13 @@ export let NanoWallet = create({
 
         onComplete: {
             type:     'function',
-            required: true
+            required: true,
+            decorate(original : Function) : Function {
+                return function decoratedOnComplete() : ZalgoPromise<void> {
+                    return this.close()
+                        .then(() => original.apply(this, arguments));
+                };
+            }
         }
     },
 
