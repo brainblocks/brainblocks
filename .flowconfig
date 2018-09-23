@@ -5,11 +5,13 @@
 .*/node_modules/cross-domain-safe-weakmap/test
 .*/node_modules/cross-domain-utils/dist
 .*/node_modules/cross-domain-utils/test
+.*/dist/module
 [include]
 [libs]
 src/types.js
 node_modules/xcomponent/src/declarations.js
 node_modules/post-robot/src/declarations.js
+node_modules/grumbler-scripts/declarations.js
 flow-typed
 [options]
 module.name_mapper='^src\(.*\)$' -> '<PROJECT_ROOT>/src/\1'

@@ -14,10 +14,11 @@ const MODULE_NAME = 'brainblocks';
 const DEFAULT_VARS = {
     __TEST__:                           false,
     __MIN__:                            false,
-    __IE_POPUP_SUPPORT__:               false,
+    __DEBUG__:                          false,
+    __IE_POPUP_SUPPORT__:               true,
     __CHILD_WINDOW_ENFORCE_LOG_LEVEL__: false,
     __SEND_POPUP_LOGS_TO_OPENER__:      false,
-    __POPUP_SUPPORT__:                  false,
+    __POPUP_SUPPORT__:                  true,
     __ALLOW_POSTMESSAGE_POPUP__:        true,
     __DEFAULT_CONTEXT__:                'iframe',
     __DEFAULT_LOG_LEVEL__:              'warn'
@@ -130,7 +131,7 @@ export let WEBPACK_CONFIG = getWebpackConfig({
     modulename: MODULE_NAME,
     vars:       {
         __XCOMPONENT__: {
-            __POPUP_SUPPORT__: false
+            __POPUP_SUPPORT__: true
         },
         __POST_ROBOT__: {
             __IE_POPUP_SUPPORT__:        false,
@@ -146,7 +147,7 @@ export let WEBPACK_CONFIG_MIN = getWebpackConfig({
     vars:       {
         __MIN__:        true,
         __XCOMPONENT__: {
-            __POPUP_SUPPORT__: false
+            __POPUP_SUPPORT__: true
         },
         __POST_ROBOT__: {
             __IE_POPUP_SUPPORT__:        false,
@@ -164,7 +165,7 @@ export let WEBPACK_CONFIG_TEST = getWebpackConfig({
     vars: {
         __TEST__:       true,
         __XCOMPONENT__: {
-            __POPUP_SUPPORT__: false
+            __POPUP_SUPPORT__: true
         },
         __POST_ROBOT__: {
             __IE_POPUP_SUPPORT__:        false,
