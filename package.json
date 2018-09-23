@@ -1,6 +1,6 @@
 {
   "name": "brainblocks",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "Javascript module template.",
   "main": "dist/brainblocks.js",
   "module": "dist/brainblocks.js",
