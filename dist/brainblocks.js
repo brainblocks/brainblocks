@@ -981,7 +981,7 @@
                 if (protocol === CONSTANTS.FILE_PROTOCOL) return CONSTANTS.FILE_PROTOCOL + "//";
                 if (protocol === CONSTANTS.ABOUT_PROTOCOL) {
                     var parent = getParent(win);
-                    return parent && canReadFromWindow(win) ? getActualDomain(parent) : CONSTANTS.ABOUT_PROTOCOL + "//";
+                    return parent && canReadFromWindow(parent) ? getActualDomain(parent) : CONSTANTS.ABOUT_PROTOCOL + "//";
                 }
                 var host = location.host;
                 if (!host) throw new Error("Can not read window host");
@@ -1129,7 +1129,8 @@
             }
             function getAllFramesInWindow(win) {
                 var top = getTop(win);
-                return getAllChildFrames(top).concat(top);
+                if (!top) throw new Error("Can not determine top window");
+                return [].concat(getAllChildFrames(top), [ top ]);
             }
             function isTop(win) {
                 return win === getTop(win);
@@ -1786,7 +1787,7 @@
                     }
                     var key = _ref, tunnelWindow = tunnelWindows[key];
                     try {
-                        Object(__WEBPACK_IMPORTED_MODULE_3__lib__.k)(tunnelWindow.source);
+                        Object(__WEBPACK_IMPORTED_MODULE_3__lib__.j)(tunnelWindow.source);
                     } catch (err) {
                         deleteTunnelWindow(key);
                         continue;
@@ -1827,7 +1828,7 @@
                     sendMessage: function() {
                         var tunnelWindow = getTunnelWindow(id);
                         try {
-                            Object(__WEBPACK_IMPORTED_MODULE_3__lib__.k)(tunnelWindow && tunnelWindow.source);
+                            Object(__WEBPACK_IMPORTED_MODULE_3__lib__.j)(tunnelWindow && tunnelWindow.source);
                         } catch (err) {
                             deleteTunnelWindow(id);
                             return;
@@ -1862,7 +1863,7 @@
                                 canary: function() {},
                                 sendMessage: function(message) {
                                     try {
-                                        Object(__WEBPACK_IMPORTED_MODULE_3__lib__.k)(window);
+                                        Object(__WEBPACK_IMPORTED_MODULE_3__lib__.j)(window);
                                     } catch (err) {
                                         return;
                                     }
@@ -1889,7 +1890,7 @@
                 });
             }
             __webpack_exports__.a = openTunnelToOpener;
-            var __WEBPACK_IMPORTED_MODULE_0_zalgo_promise_src__ = __webpack_require__("./node_modules/zalgo-promise/src/index.js"), __WEBPACK_IMPORTED_MODULE_1_cross_domain_utils_src__ = __webpack_require__("./node_modules/cross-domain-utils/src/index.js"), __WEBPACK_IMPORTED_MODULE_2__conf__ = __webpack_require__("./node_modules/post-robot/src/conf/index.js"), __WEBPACK_IMPORTED_MODULE_3__lib__ = __webpack_require__("./node_modules/post-robot/src/lib/index.js"), __WEBPACK_IMPORTED_MODULE_4__global__ = __webpack_require__("./node_modules/post-robot/src/global.js"), __WEBPACK_IMPORTED_MODULE_5__common__ = __webpack_require__("./node_modules/post-robot/src/bridge/common.js"), awaitRemoteBridgeForWindow = Object(__WEBPACK_IMPORTED_MODULE_3__lib__.s)(function(win) {
+            var __WEBPACK_IMPORTED_MODULE_0_zalgo_promise_src__ = __webpack_require__("./node_modules/zalgo-promise/src/index.js"), __WEBPACK_IMPORTED_MODULE_1_cross_domain_utils_src__ = __webpack_require__("./node_modules/cross-domain-utils/src/index.js"), __WEBPACK_IMPORTED_MODULE_2__conf__ = __webpack_require__("./node_modules/post-robot/src/conf/index.js"), __WEBPACK_IMPORTED_MODULE_3__lib__ = __webpack_require__("./node_modules/post-robot/src/lib/index.js"), __WEBPACK_IMPORTED_MODULE_4__global__ = __webpack_require__("./node_modules/post-robot/src/global.js"), __WEBPACK_IMPORTED_MODULE_5__common__ = __webpack_require__("./node_modules/post-robot/src/bridge/common.js"), awaitRemoteBridgeForWindow = Object(__WEBPACK_IMPORTED_MODULE_3__lib__.r)(function(win) {
                 return __WEBPACK_IMPORTED_MODULE_0_zalgo_promise_src__.a.try(function() {
                     for (var _iterator = Object(__WEBPACK_IMPORTED_MODULE_1_cross_domain_utils_src__.getFrames)(win), _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator](); ;) {
                         var _ref;
@@ -2145,7 +2146,6 @@
                 });
             }
             function openBridgeFrame(name, url) {
-                __WEBPACK_IMPORTED_MODULE_4__lib__.i.debug("Opening bridge:", name, url);
                 var iframe = document.createElement("iframe");
                 iframe.setAttribute("name", name);
                 iframe.setAttribute("id", name);
@@ -2182,7 +2182,7 @@
                             iframe.onload = resolve;
                             iframe.onerror = reject;
                         }).then(function() {
-                            return Object(__WEBPACK_IMPORTED_MODULE_4__lib__.l)(bridge, __WEBPACK_IMPORTED_MODULE_3__conf__.a.BRIDGE_TIMEOUT, "Bridge " + url);
+                            return Object(__WEBPACK_IMPORTED_MODULE_4__lib__.k)(bridge, __WEBPACK_IMPORTED_MODULE_3__conf__.a.BRIDGE_TIMEOUT, "Bridge " + url);
                         }).then(function() {
                             return bridge;
                         });
@@ -2314,12 +2314,10 @@
                     __IE_POPUP_SUPPORT__: !1,
                     __ALLOW_POSTMESSAGE_POPUP__: !0
                 }.__ALLOW_POSTMESSAGE_POPUP__,
-                LOG_LEVEL: "info",
                 BRIDGE_TIMEOUT: 5e3,
                 CHILD_WINDOW_TIMEOUT: 5e3,
                 ACK_TIMEOUT: -1 !== window.navigator.userAgent.match(/MSIE/i) ? 2e3 : 1e3,
                 RES_TIMEOUT: -1,
-                LOG_TO_PAGE: !1,
                 ALLOWED_POST_MESSAGE_METHODS: (_ALLOWED_POST_MESSAGE = {}, _ALLOWED_POST_MESSAGE[__WEBPACK_IMPORTED_MODULE_0__constants__.a.SEND_STRATEGIES.POST_MESSAGE] = !0, 
                 _ALLOWED_POST_MESSAGE[__WEBPACK_IMPORTED_MODULE_0__constants__.a.SEND_STRATEGIES.BRIDGE] = !0, 
                 _ALLOWED_POST_MESSAGE[__WEBPACK_IMPORTED_MODULE_0__constants__.a.SEND_STRATEGIES.GLOBAL] = !0, 
@@ -2332,9 +2330,6 @@
             "use strict";
             __webpack_require__.d(__webpack_exports__, "a", function() {
                 return CONSTANTS;
-            });
-            __webpack_require__.d(__webpack_exports__, "b", function() {
-                return POST_MESSAGE_NAMES_LIST;
             });
             var CONSTANTS = {
                 POST_MESSAGE_TYPE: {
@@ -2380,7 +2375,8 @@
                 METHOD: "postrobot_method",
                 HELLO: "postrobot_hello",
                 OPEN_TUNNEL: "postrobot_open_tunnel"
-            }, POST_MESSAGE_NAMES_LIST = Object.keys(POST_MESSAGE_NAMES).map(function(key) {
+            };
+            Object.keys(POST_MESSAGE_NAMES).map(function(key) {
                 return POST_MESSAGE_NAMES[key];
             });
         },
@@ -2393,9 +2389,6 @@
             var __WEBPACK_IMPORTED_MODULE_1__constants__ = __webpack_require__("./node_modules/post-robot/src/conf/constants.js");
             __webpack_require__.d(__webpack_exports__, "b", function() {
                 return __WEBPACK_IMPORTED_MODULE_1__constants__.a;
-            });
-            __webpack_require__.d(__webpack_exports__, "c", function() {
-                return __WEBPACK_IMPORTED_MODULE_1__constants__.b;
             });
         },
         "./node_modules/post-robot/src/drivers/index.js": function(module, __webpack_exports__, __webpack_require__) {
@@ -2626,19 +2619,16 @@
                     0 !== message.sourceDomain.indexOf(__WEBPACK_IMPORTED_MODULE_1__conf__.b.MOCK_PROTOCOL) && 0 !== message.sourceDomain.indexOf(__WEBPACK_IMPORTED_MODULE_1__conf__.b.FILE_PROTOCOL) || (origin = message.sourceDomain);
                     if (-1 === __WEBPACK_IMPORTED_MODULE_3__global__.a.receivedMessages.indexOf(message.id)) {
                         __WEBPACK_IMPORTED_MODULE_3__global__.a.receivedMessages.push(message.id);
-                        var level = void 0;
-                        level = -1 !== __WEBPACK_IMPORTED_MODULE_1__conf__.c.indexOf(message.name) || message.type === __WEBPACK_IMPORTED_MODULE_1__conf__.b.POST_MESSAGE_TYPE.ACK ? "debug" : "error" === message.ack ? "error" : "info";
-                        __WEBPACK_IMPORTED_MODULE_2__lib__.i.logLevel(level, [ "\n\n\t", "#receive", message.type.replace(/^postrobot_message_/, ""), "::", message.name, "::", origin, "\n\n", message ]);
                         if (!Object(__WEBPACK_IMPORTED_MODULE_0_cross_domain_utils_src__.isWindowClosed)(source) || message.fireAndForget) {
                             message.data && (message.data = Object(__WEBPACK_IMPORTED_MODULE_2__lib__.b)(source, origin, message.data));
                             __WEBPACK_IMPORTED_MODULE_4__types__.a[message.type](source, origin, message);
-                        } else __WEBPACK_IMPORTED_MODULE_2__lib__.i.debug("Source window is closed - can not send " + message.type + " " + message.name);
+                        }
                     }
                 }
             }
             function messageListener(event) {
                 try {
-                    Object(__WEBPACK_IMPORTED_MODULE_2__lib__.k)(event.source);
+                    Object(__WEBPACK_IMPORTED_MODULE_2__lib__.j)(event.source);
                 } catch (err) {
                     return;
                 }
@@ -2719,16 +2709,16 @@
                         data: data
                     });
                 }, function(err) {
-                    var error = Object(__WEBPACK_IMPORTED_MODULE_3__lib__.q)(err).replace(/^Error: /, ""), code = err.code;
+                    var error = Object(__WEBPACK_IMPORTED_MODULE_3__lib__.p)(err).replace(/^Error: /, ""), code = err.code;
                     return respond({
                         type: __WEBPACK_IMPORTED_MODULE_2__conf__.b.POST_MESSAGE_TYPE.RESPONSE,
                         ack: __WEBPACK_IMPORTED_MODULE_2__conf__.b.POST_MESSAGE_ACK.ERROR,
                         error: error,
                         code: code
                     });
-                }) ]).then(__WEBPACK_IMPORTED_MODULE_3__lib__.k).catch(function(err) {
+                }) ]).then(__WEBPACK_IMPORTED_MODULE_3__lib__.j).catch(function(err) {
                     if (options && options.handleError) return options.handleError(err);
-                    __WEBPACK_IMPORTED_MODULE_3__lib__.i.error(Object(__WEBPACK_IMPORTED_MODULE_3__lib__.q)(err));
+                    throw err;
                 });
             }, _RECEIVE_MESSAGE_TYPE[__WEBPACK_IMPORTED_MODULE_2__conf__.b.POST_MESSAGE_TYPE.RESPONSE] = function(source, origin, message) {
                 if (!Object(__WEBPACK_IMPORTED_MODULE_5__listeners__.f)(message.hash)) {
@@ -2755,7 +2745,7 @@
         "./node_modules/post-robot/src/drivers/send/index.js": function(module, __webpack_exports__, __webpack_require__) {
             "use strict";
             function buildMessage(win, message) {
-                var options = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : {}, id = Object(__WEBPACK_IMPORTED_MODULE_3__lib__.r)(), type = Object(__WEBPACK_IMPORTED_MODULE_3__lib__.c)(), sourceDomain = Object(__WEBPACK_IMPORTED_MODULE_0_cross_domain_utils_src__.getDomain)(window);
+                var options = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : {}, id = Object(__WEBPACK_IMPORTED_MODULE_3__lib__.q)(), type = Object(__WEBPACK_IMPORTED_MODULE_3__lib__.c)(), sourceDomain = Object(__WEBPACK_IMPORTED_MODULE_0_cross_domain_utils_src__.getDomain)(window);
                 return _extends({}, message, options, {
                     sourceDomain: sourceDomain,
                     id: message.id || id,
@@ -2766,15 +2756,11 @@
                 return __WEBPACK_IMPORTED_MODULE_1_zalgo_promise_src__.a.try(function() {
                     var _jsonStringify;
                     message = buildMessage(win, message, {
-                        data: Object(__WEBPACK_IMPORTED_MODULE_3__lib__.p)(win, domain, message.data),
+                        data: Object(__WEBPACK_IMPORTED_MODULE_3__lib__.o)(win, domain, message.data),
                         domain: domain
                     });
-                    var level = void 0;
-                    level = -1 !== __WEBPACK_IMPORTED_MODULE_2__conf__.c.indexOf(message.name) || message.type === __WEBPACK_IMPORTED_MODULE_2__conf__.b.POST_MESSAGE_TYPE.ACK ? "debug" : "error" === message.ack ? "error" : "info";
-                    __WEBPACK_IMPORTED_MODULE_3__lib__.i.logLevel(level, [ "\n\n\t", "#send", message.type.replace(/^postrobot_message_/, ""), "::", message.name, "::", domain || __WEBPACK_IMPORTED_MODULE_2__conf__.b.WILDCARD, "\n\n", message ]);
                     if (win === window && !__WEBPACK_IMPORTED_MODULE_2__conf__.a.ALLOW_SAME_ORIGIN) throw new Error("Attemping to send message to self");
                     if (Object(__WEBPACK_IMPORTED_MODULE_0_cross_domain_utils_src__.isWindowClosed)(win)) throw new Error("Window is closed");
-                    __WEBPACK_IMPORTED_MODULE_3__lib__.i.debug("Running send message strategies", message);
                     var messages = [], serializedMessage = Object(__WEBPACK_IMPORTED_MODULE_3__lib__.g)((_jsonStringify = {}, 
                     _jsonStringify[__WEBPACK_IMPORTED_MODULE_2__conf__.b.WINDOW_PROPS.POSTROBOT] = message, 
                     _jsonStringify), null, 2);
@@ -2786,12 +2772,11 @@
                             messages.push(strategyName + ": success");
                             return !0;
                         }, function(err) {
-                            messages.push(strategyName + ": " + Object(__WEBPACK_IMPORTED_MODULE_3__lib__.q)(err) + "\n");
+                            messages.push(strategyName + ": " + Object(__WEBPACK_IMPORTED_MODULE_3__lib__.p)(err) + "\n");
                             return !1;
                         });
                     }).then(function(results) {
                         var success = results.some(Boolean), status = message.type + " " + message.name + " " + (success ? "success" : "error") + ":\n  - " + messages.join("\n  - ") + "\n";
-                        __WEBPACK_IMPORTED_MODULE_3__lib__.i.debug(status);
                         if (!success) throw new Error(status);
                     });
                 });
@@ -2854,7 +2839,7 @@
                 __IE_POPUP_SUPPORT__: !1,
                 __ALLOW_POSTMESSAGE_POPUP__: !0
             }.__GLOBAL_MESSAGE_SUPPORT__) && (SEND_MESSAGE_STRATEGIES[__WEBPACK_IMPORTED_MODULE_1__conf__.b.SEND_STRATEGIES.GLOBAL] = function(win, serializedMessage) {
-                if (Object(__WEBPACK_IMPORTED_MODULE_2__lib__.j)()) {
+                if (Object(__WEBPACK_IMPORTED_MODULE_2__lib__.i)()) {
                     if (!Object(__WEBPACK_IMPORTED_MODULE_0_cross_domain_utils_src__.isSameDomain)(win)) throw new Error("Post message through global disabled between different domain windows");
                     if (!1 !== Object(__WEBPACK_IMPORTED_MODULE_0_cross_domain_utils_src__.isSameTopWindow)(window, win)) throw new Error("Can only use global to communicate between two different windows, not between frames");
                     var foreignGlobal = win[__WEBPACK_IMPORTED_MODULE_1__conf__.b.WINDOW_PROPS.POSTROBOT];
@@ -3024,140 +3009,47 @@
             __webpack_require__.d(__webpack_exports__, "g", function() {
                 return __WEBPACK_IMPORTED_MODULE_0__util__.e;
             });
-            __webpack_require__.d(__webpack_exports__, "j", function() {
+            __webpack_require__.d(__webpack_exports__, "i", function() {
                 return __WEBPACK_IMPORTED_MODULE_0__util__.f;
             });
-            __webpack_require__.d(__webpack_exports__, "k", function() {
+            __webpack_require__.d(__webpack_exports__, "j", function() {
                 return __WEBPACK_IMPORTED_MODULE_0__util__.g;
             });
-            __webpack_require__.d(__webpack_exports__, "m", function() {
+            __webpack_require__.d(__webpack_exports__, "l", function() {
                 return __WEBPACK_IMPORTED_MODULE_0__util__.h;
             });
-            __webpack_require__.d(__webpack_exports__, "n", function() {
+            __webpack_require__.d(__webpack_exports__, "m", function() {
                 return __WEBPACK_IMPORTED_MODULE_0__util__.j;
             });
-            __webpack_require__.d(__webpack_exports__, "q", function() {
+            __webpack_require__.d(__webpack_exports__, "p", function() {
                 return __WEBPACK_IMPORTED_MODULE_0__util__.k;
             });
-            __webpack_require__.d(__webpack_exports__, "r", function() {
+            __webpack_require__.d(__webpack_exports__, "q", function() {
                 return __WEBPACK_IMPORTED_MODULE_0__util__.l;
             });
-            __webpack_require__.d(__webpack_exports__, "s", function() {
+            __webpack_require__.d(__webpack_exports__, "r", function() {
                 return __WEBPACK_IMPORTED_MODULE_0__util__.m;
             });
-            var __WEBPACK_IMPORTED_MODULE_1__log__ = __webpack_require__("./node_modules/post-robot/src/lib/log.js");
-            __webpack_require__.d(__webpack_exports__, "i", function() {
-                return __WEBPACK_IMPORTED_MODULE_1__log__.a;
-            });
-            var __WEBPACK_IMPORTED_MODULE_2__serialize__ = __webpack_require__("./node_modules/post-robot/src/lib/serialize.js");
+            var __WEBPACK_IMPORTED_MODULE_1__serialize__ = __webpack_require__("./node_modules/post-robot/src/lib/serialize.js");
             __webpack_require__.d(__webpack_exports__, "b", function() {
-                return __WEBPACK_IMPORTED_MODULE_2__serialize__.a;
+                return __WEBPACK_IMPORTED_MODULE_1__serialize__.a;
             });
             __webpack_require__.d(__webpack_exports__, "h", function() {
-                return __WEBPACK_IMPORTED_MODULE_2__serialize__.b;
-            });
-            __webpack_require__.d(__webpack_exports__, "p", function() {
-                return __WEBPACK_IMPORTED_MODULE_2__serialize__.c;
-            });
-            var __WEBPACK_IMPORTED_MODULE_3__ready__ = __webpack_require__("./node_modules/post-robot/src/lib/ready.js");
-            __webpack_require__.d(__webpack_exports__, "d", function() {
-                return __WEBPACK_IMPORTED_MODULE_3__ready__.a;
-            });
-            __webpack_require__.d(__webpack_exports__, "l", function() {
-                return __WEBPACK_IMPORTED_MODULE_3__ready__.b;
+                return __WEBPACK_IMPORTED_MODULE_1__serialize__.b;
             });
             __webpack_require__.d(__webpack_exports__, "o", function() {
-                return __WEBPACK_IMPORTED_MODULE_3__ready__.c;
+                return __WEBPACK_IMPORTED_MODULE_1__serialize__.c;
             });
-        },
-        "./node_modules/post-robot/src/lib/log.js": function(module, __webpack_exports__, __webpack_require__) {
-            "use strict";
-            __webpack_require__.d(__webpack_exports__, "a", function() {
-                return log;
+            var __WEBPACK_IMPORTED_MODULE_2__ready__ = __webpack_require__("./node_modules/post-robot/src/lib/ready.js");
+            __webpack_require__.d(__webpack_exports__, "d", function() {
+                return __WEBPACK_IMPORTED_MODULE_2__ready__.a;
             });
-            var __WEBPACK_IMPORTED_MODULE_0__conf__ = __webpack_require__("./node_modules/post-robot/src/conf/index.js"), __WEBPACK_IMPORTED_MODULE_1__util__ = __webpack_require__("./node_modules/post-robot/src/lib/util.js"), _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(obj) {
-                return typeof obj;
-            } : function(obj) {
-                return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-            }, LOG_LEVELS = [ "debug", "info", "warn", "error" ];
-            Function.prototype.bind && window.console && "object" === _typeof(console.log) && [ "log", "info", "warn", "error" ].forEach(function(method) {
-                console[method] = this.bind(console[method], console);
-            }, Function.prototype.call);
-            var log = {
-                clearLogs: function() {
-                    window.console && window.console.clear && window.console.clear();
-                    if (__WEBPACK_IMPORTED_MODULE_0__conf__.a.LOG_TO_PAGE) {
-                        var container = document.getElementById("postRobotLogs");
-                        container && container.parentNode && container.parentNode.removeChild(container);
-                    }
-                },
-                writeToPage: function(level, args) {
-                    setTimeout(function() {
-                        var container = document.getElementById("postRobotLogs");
-                        if (!container) {
-                            container = document.createElement("div");
-                            container.id = "postRobotLogs";
-                            container.style.cssText = "width: 800px; font-family: monospace; white-space: pre-wrap;";
-                            document.body && document.body.appendChild(container);
-                        }
-                        var el = document.createElement("div"), date = new Date().toString().split(" ")[4], payload = Array.prototype.slice.call(args).map(function(item) {
-                            if ("string" == typeof item) return item;
-                            if (!item) return Object.prototype.toString.call(item);
-                            var json = void 0;
-                            try {
-                                json = Object(__WEBPACK_IMPORTED_MODULE_1__util__.e)(item, null, 2);
-                            } catch (err) {
-                                json = "[object]";
-                            }
-                            return "\n\n" + json + "\n\n";
-                        }).join(" "), msg = date + " " + level + " " + payload;
-                        el.innerHTML = msg;
-                        var color = {
-                            log: "#ddd",
-                            warn: "orange",
-                            error: "red",
-                            info: "blue",
-                            debug: "#aaa"
-                        }[level];
-                        el.style.cssText = "margin-top: 10px; color: " + color + ";";
-                        container.childNodes.length ? container.insertBefore(el, container.childNodes[0]) : container.appendChild(el);
-                    });
-                },
-                logLevel: function(level, args) {
-                    setTimeout(function() {
-                        try {
-                            var logLevel = window.LOG_LEVEL || __WEBPACK_IMPORTED_MODULE_0__conf__.a.LOG_LEVEL;
-                            if ("disabled" === logLevel || LOG_LEVELS.indexOf(level) < LOG_LEVELS.indexOf(logLevel)) return;
-                            args = Array.prototype.slice.call(args);
-                            args.unshift("" + window.location.host + window.location.pathname);
-                            args.unshift("::");
-                            args.unshift("" + Object(__WEBPACK_IMPORTED_MODULE_1__util__.b)().toLowerCase());
-                            args.unshift("[post-robot]");
-                            __WEBPACK_IMPORTED_MODULE_0__conf__.a.LOG_TO_PAGE && log.writeToPage(level, args);
-                            if (!window.console) return;
-                            window.console[level] || (level = "log");
-                            if (!window.console[level]) return;
-                            window.console[level].apply(window.console, args);
-                        } catch (err) {}
-                    }, 1);
-                },
-                debug: function() {
-                    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) args[_key] = arguments[_key];
-                    log.logLevel("debug", args);
-                },
-                info: function() {
-                    for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) args[_key2] = arguments[_key2];
-                    log.logLevel("info", args);
-                },
-                warn: function() {
-                    for (var _len3 = arguments.length, args = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) args[_key3] = arguments[_key3];
-                    log.logLevel("warn", args);
-                },
-                error: function() {
-                    for (var _len4 = arguments.length, args = Array(_len4), _key4 = 0; _key4 < _len4; _key4++) args[_key4] = arguments[_key4];
-                    log.logLevel("error", args);
-                }
-            };
+            __webpack_require__.d(__webpack_exports__, "k", function() {
+                return __WEBPACK_IMPORTED_MODULE_2__ready__.b;
+            });
+            __webpack_require__.d(__webpack_exports__, "n", function() {
+                return __WEBPACK_IMPORTED_MODULE_2__ready__.c;
+            });
         },
         "./node_modules/post-robot/src/lib/ready.js": function(module, __webpack_exports__, __webpack_require__) {
             "use strict";
@@ -3191,9 +3083,7 @@
                     __WEBPACK_IMPORTED_MODULE_4__global__.a.readyPromises.set(source, promise);
                 });
                 var parent = Object(__WEBPACK_IMPORTED_MODULE_1_cross_domain_utils_src__.getAncestor)();
-                parent && sayHello(parent).catch(function(err) {
-                    __WEBPACK_IMPORTED_MODULE_5__log__.a.debug(Object(__WEBPACK_IMPORTED_MODULE_6__util__.k)(err));
-                });
+                parent && sayHello(parent).catch(__WEBPACK_IMPORTED_MODULE_5__util__.g);
             }
             function onChildWindowReady(win) {
                 var timeout = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : 5e3, name = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : "Window", promise = __WEBPACK_IMPORTED_MODULE_4__global__.a.readyPromises.get(win);
@@ -3208,7 +3098,7 @@
             __webpack_exports__.c = sayHello;
             __webpack_exports__.a = initOnReady;
             __webpack_exports__.b = onChildWindowReady;
-            var __WEBPACK_IMPORTED_MODULE_0_cross_domain_safe_weakmap_src__ = __webpack_require__("./node_modules/cross-domain-safe-weakmap/src/index.js"), __WEBPACK_IMPORTED_MODULE_1_cross_domain_utils_src__ = __webpack_require__("./node_modules/cross-domain-utils/src/index.js"), __WEBPACK_IMPORTED_MODULE_2_zalgo_promise_src__ = __webpack_require__("./node_modules/zalgo-promise/src/index.js"), __WEBPACK_IMPORTED_MODULE_3__conf__ = __webpack_require__("./node_modules/post-robot/src/conf/index.js"), __WEBPACK_IMPORTED_MODULE_4__global__ = __webpack_require__("./node_modules/post-robot/src/global.js"), __WEBPACK_IMPORTED_MODULE_5__log__ = __webpack_require__("./node_modules/post-robot/src/lib/log.js"), __WEBPACK_IMPORTED_MODULE_6__util__ = __webpack_require__("./node_modules/post-robot/src/lib/util.js");
+            var __WEBPACK_IMPORTED_MODULE_0_cross_domain_safe_weakmap_src__ = __webpack_require__("./node_modules/cross-domain-safe-weakmap/src/index.js"), __WEBPACK_IMPORTED_MODULE_1_cross_domain_utils_src__ = __webpack_require__("./node_modules/cross-domain-utils/src/index.js"), __WEBPACK_IMPORTED_MODULE_2_zalgo_promise_src__ = __webpack_require__("./node_modules/zalgo-promise/src/index.js"), __WEBPACK_IMPORTED_MODULE_3__conf__ = __webpack_require__("./node_modules/post-robot/src/conf/index.js"), __WEBPACK_IMPORTED_MODULE_4__global__ = __webpack_require__("./node_modules/post-robot/src/global.js"), __WEBPACK_IMPORTED_MODULE_5__util__ = __webpack_require__("./node_modules/post-robot/src/lib/util.js");
             __WEBPACK_IMPORTED_MODULE_4__global__.a.readyPromises = __WEBPACK_IMPORTED_MODULE_4__global__.a.readyPromises || new __WEBPACK_IMPORTED_MODULE_0_cross_domain_safe_weakmap_src__.a();
         },
         "./node_modules/post-robot/src/lib/serialize.js": function(module, __webpack_exports__, __webpack_require__) {
@@ -3271,7 +3161,6 @@
             function deserializeMethod(source, origin, obj) {
                 function wrapper() {
                     var args = Array.prototype.slice.call(arguments);
-                    __WEBPACK_IMPORTED_MODULE_6__log__.a.debug("Call foreign method", obj.__name__, args);
                     return __WEBPACK_IMPORTED_MODULE_4__global__.a.send(source, __WEBPACK_IMPORTED_MODULE_3__conf__.b.POST_MESSAGE_NAMES.METHOD, {
                         id: obj.__id__,
                         name: obj.__name__,
@@ -3280,11 +3169,8 @@
                         domain: origin,
                         timeout: -1
                     }).then(function(_ref2) {
-                        var data = _ref2.data;
-                        __WEBPACK_IMPORTED_MODULE_6__log__.a.debug("Got foreign method result", obj.__name__, data.result);
-                        return data.result;
+                        return _ref2.data.result;
                     }, function(err) {
-                        __WEBPACK_IMPORTED_MODULE_6__log__.a.debug("Got foreign method error", Object(__WEBPACK_IMPORTED_MODULE_5__util__.k)(err));
                         throw err;
                     });
                 }
@@ -3324,7 +3210,7 @@
             });
             __webpack_exports__.c = serializeMethods;
             __webpack_exports__.a = deserializeMethods;
-            var __WEBPACK_IMPORTED_MODULE_0_cross_domain_safe_weakmap_src__ = __webpack_require__("./node_modules/cross-domain-safe-weakmap/src/index.js"), __WEBPACK_IMPORTED_MODULE_1_cross_domain_utils_src__ = __webpack_require__("./node_modules/cross-domain-utils/src/index.js"), __WEBPACK_IMPORTED_MODULE_2_zalgo_promise_src__ = __webpack_require__("./node_modules/zalgo-promise/src/index.js"), __WEBPACK_IMPORTED_MODULE_3__conf__ = __webpack_require__("./node_modules/post-robot/src/conf/index.js"), __WEBPACK_IMPORTED_MODULE_4__global__ = __webpack_require__("./node_modules/post-robot/src/global.js"), __WEBPACK_IMPORTED_MODULE_5__util__ = __webpack_require__("./node_modules/post-robot/src/lib/util.js"), __WEBPACK_IMPORTED_MODULE_6__log__ = __webpack_require__("./node_modules/post-robot/src/lib/log.js"), _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(obj) {
+            var __WEBPACK_IMPORTED_MODULE_0_cross_domain_safe_weakmap_src__ = __webpack_require__("./node_modules/cross-domain-safe-weakmap/src/index.js"), __WEBPACK_IMPORTED_MODULE_1_cross_domain_utils_src__ = __webpack_require__("./node_modules/cross-domain-utils/src/index.js"), __WEBPACK_IMPORTED_MODULE_2_zalgo_promise_src__ = __webpack_require__("./node_modules/zalgo-promise/src/index.js"), __WEBPACK_IMPORTED_MODULE_3__conf__ = __webpack_require__("./node_modules/post-robot/src/conf/index.js"), __WEBPACK_IMPORTED_MODULE_4__global__ = __webpack_require__("./node_modules/post-robot/src/global.js"), __WEBPACK_IMPORTED_MODULE_5__util__ = __webpack_require__("./node_modules/post-robot/src/lib/util.js"), _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(obj) {
                 return typeof obj;
             } : function(obj) {
                 return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
@@ -3339,7 +3225,6 @@
                     var meth = methods[data.id];
                     if (!meth) throw new Error("Could not find method with id: " + data.id);
                     if (!Object(__WEBPACK_IMPORTED_MODULE_1_cross_domain_utils_src__.matchDomain)(meth.domain, origin)) throw new Error("Method domain " + meth.domain + " does not match origin " + origin);
-                    __WEBPACK_IMPORTED_MODULE_6__log__.a.debug("Call local method", data.name, data.args);
                     return __WEBPACK_IMPORTED_MODULE_2_zalgo_promise_src__.a.try(function() {
                         return meth.method.apply({
                             source: source,
@@ -3524,7 +3409,7 @@
                     if (!targetWindow) throw new Error("Expected options.window to be a window object, iframe, or iframe element id.");
                     var win = targetWindow;
                     domain = options.domain || __WEBPACK_IMPORTED_MODULE_3__conf__.b.WILDCARD;
-                    var hash = options.name + "_" + Object(__WEBPACK_IMPORTED_MODULE_5__lib__.r)();
+                    var hash = options.name + "_" + Object(__WEBPACK_IMPORTED_MODULE_5__lib__.q)();
                     if (Object(__WEBPACK_IMPORTED_MODULE_2_cross_domain_utils_src__.isWindowClosed)(win)) throw new Error("Target window is closed");
                     var hasResult = !1, requestPromises = __WEBPACK_IMPORTED_MODULE_6__global__.a.requestPromises.get(win);
                     if (!requestPromises) {
@@ -3532,10 +3417,10 @@
                         __WEBPACK_IMPORTED_MODULE_6__global__.a.requestPromises.set(win, requestPromises);
                     }
                     var requestPromise = __WEBPACK_IMPORTED_MODULE_1_zalgo_promise_src__.a.try(function() {
-                        if (Object(__WEBPACK_IMPORTED_MODULE_2_cross_domain_utils_src__.isAncestor)(window, win)) return Object(__WEBPACK_IMPORTED_MODULE_5__lib__.l)(win, options.timeout || __WEBPACK_IMPORTED_MODULE_3__conf__.a.CHILD_WINDOW_TIMEOUT);
+                        if (Object(__WEBPACK_IMPORTED_MODULE_2_cross_domain_utils_src__.isAncestor)(window, win)) return Object(__WEBPACK_IMPORTED_MODULE_5__lib__.k)(win, options.timeout || __WEBPACK_IMPORTED_MODULE_3__conf__.a.CHILD_WINDOW_TIMEOUT);
                     }).then(function() {
                         var _ref = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {}, origin = _ref.origin;
-                        if (Object(__WEBPACK_IMPORTED_MODULE_5__lib__.e)(domain) && !origin) return Object(__WEBPACK_IMPORTED_MODULE_5__lib__.o)(win);
+                        if (Object(__WEBPACK_IMPORTED_MODULE_5__lib__.e)(domain) && !origin) return Object(__WEBPACK_IMPORTED_MODULE_5__lib__.n)(win);
                     }).then(function() {
                         var _ref2 = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {}, origin = _ref2.origin;
                         if (Object(__WEBPACK_IMPORTED_MODULE_5__lib__.e)(domain)) {
@@ -3706,12 +3591,12 @@
                 }, listenerOptions);
                 if (options.once) {
                     var _handler = listenerOptions.handler;
-                    listenerOptions.handler = Object(__WEBPACK_IMPORTED_MODULE_2__lib__.m)(function() {
+                    listenerOptions.handler = Object(__WEBPACK_IMPORTED_MODULE_2__lib__.l)(function() {
                         requestListener.cancel();
                         return _handler.apply(this, arguments);
                     });
                 }
-                if (listenerOptions.window && options.errorOnClose) var interval = Object(__WEBPACK_IMPORTED_MODULE_2__lib__.n)(function() {
+                if (listenerOptions.window && options.errorOnClose) var interval = Object(__WEBPACK_IMPORTED_MODULE_2__lib__.m)(function() {
                     if (win && "object" === (void 0 === win ? "undefined" : _typeof(win)) && Object(__WEBPACK_IMPORTED_MODULE_0_cross_domain_utils_src__.isWindowClosed)(win)) {
                         interval.cancel();
                         listenerOptions.handleError(new Error("Post message target window is closed"));
@@ -4968,7 +4853,7 @@
                 }
                 if (options.contexts) {
                     if (options.contexts.popup && !{
-                        __POPUP_SUPPORT__: !1
+                        __POPUP_SUPPORT__: !0
                     }.__POPUP_SUPPORT__) throw new Error("Popups not supported in this build -- please use the full xcomponent.js build");
                     for (var anyEnabled = !1, _iterator2 = Object.keys(options.contexts), _isArray2 = Array.isArray(_iterator2), _i2 = 0, _iterator2 = _isArray2 ? _iterator2 : _iterator2[Symbol.iterator](); ;) {
                         var _ref2;
@@ -5296,7 +5181,7 @@
                 }
             };
             ({
-                __POPUP_SUPPORT__: !1
+                __POPUP_SUPPORT__: !0
             }).__POPUP_SUPPORT__ && (RENDER_DRIVERS[__WEBPACK_IMPORTED_MODULE_4__constants__.CONTEXT_TYPES.POPUP] = {
                 focusable: !0,
                 renderedIntoContainerTemplate: !1,
@@ -6080,12 +5965,27 @@
                             } catch (err) {
                                 return;
                             }
+                            var el = void 0;
                             try {
-                                Object(__WEBPACK_IMPORTED_MODULE_6__lib__._3)(win, _this31.renderTemplate(_this31.component.prerenderTemplate, {
+                                el = _this31.renderTemplate(_this31.component.prerenderTemplate, {
                                     jsxDom: __WEBPACK_IMPORTED_MODULE_6__lib__.F.bind(doc),
                                     document: doc
-                                }));
-                            } catch (err) {}
+                                });
+                            } catch (err) {
+                                _this31.component.logError("preprender_error", {
+                                    err: err.stack ? err.stack : err.toString()
+                                });
+                                console.error(err.stack ? err.stack : err);
+                                return;
+                            }
+                            try {
+                                Object(__WEBPACK_IMPORTED_MODULE_6__lib__._3)(win, el);
+                            } catch (err) {
+                                _this31.component.logError("preprender_error", {
+                                    err: err.stack ? err.stack : err.toString()
+                                });
+                                console.error(err.stack ? err.stack : err);
+                            }
                         }) : __WEBPACK_IMPORTED_MODULE_3_zalgo_promise_src__.a.resolve();
                     });
                 };
@@ -7589,7 +7489,7 @@
                     if (arguments.length > 3) throw new Error("Expected only text content for " + name + " tag");
                     el.text = content;
                 } else for (var i = 2; i < arguments.length; i++) if ("string" == typeof arguments[i]) {
-                    var textNode = document.createTextNode(arguments[i]);
+                    var textNode = doc.createTextNode(arguments[i]);
                     appendChild(el, textNode);
                 } else appendChild(el, arguments[i]);
                 return el;
@@ -8227,13 +8127,13 @@
         "./node_modules/xcomponent/src/types.js": function(module, exports) {},
         "./node_modules/zalgo-promise/src/exceptions.js": function(module, __webpack_exports__, __webpack_require__) {
             "use strict";
-            function dispatchPossiblyUnhandledError(err) {
+            function dispatchPossiblyUnhandledError(err, promise) {
                 if (-1 === Object(__WEBPACK_IMPORTED_MODULE_0__global__.a)().dispatchedErrors.indexOf(err)) {
                     Object(__WEBPACK_IMPORTED_MODULE_0__global__.a)().dispatchedErrors.push(err);
                     setTimeout(function() {
                         throw err;
                     }, 1);
-                    for (var j = 0; j < Object(__WEBPACK_IMPORTED_MODULE_0__global__.a)().possiblyUnhandledPromiseHandlers.length; j++) Object(__WEBPACK_IMPORTED_MODULE_0__global__.a)().possiblyUnhandledPromiseHandlers[j](err);
+                    for (var j = 0; j < Object(__WEBPACK_IMPORTED_MODULE_0__global__.a)().possiblyUnhandledPromiseHandlers.length; j++) Object(__WEBPACK_IMPORTED_MODULE_0__global__.a)().possiblyUnhandledPromiseHandlers[j](err, promise);
                 }
             }
             function onPossiblyUnhandledException(handler) {
@@ -8331,7 +8231,7 @@
                     this.rejected = !0;
                     this.error = error;
                     this.errorHandled || setTimeout(function() {
-                        _this2.errorHandled || Object(__WEBPACK_IMPORTED_MODULE_1__exceptions__.a)(error);
+                        _this2.errorHandled || Object(__WEBPACK_IMPORTED_MODULE_1__exceptions__.a)(error, _this2);
                     }, 1);
                     this.dispatch();
                     return this;
@@ -8397,13 +8297,14 @@
                 ZalgoPromise.prototype.catch = function(onError) {
                     return this.then(void 0, onError);
                 };
-                ZalgoPromise.prototype.finally = function(handler) {
+                ZalgoPromise.prototype.finally = function(onFinally) {
+                    if (onFinally && "function" != typeof onFinally && !onFinally.call) throw new Error("Promise.finally expected a function");
                     return this.then(function(result) {
-                        return ZalgoPromise.try(handler).then(function() {
+                        return ZalgoPromise.try(onFinally).then(function() {
                             return result;
                         });
                     }, function(err) {
-                        return ZalgoPromise.try(handler).then(function() {
+                        return ZalgoPromise.try(onFinally).then(function() {
                             throw err;
                         });
                     });
@@ -8480,6 +8381,7 @@
                     return Object(__WEBPACK_IMPORTED_MODULE_1__exceptions__.b)(handler);
                 };
                 ZalgoPromise.try = function(method, context, args) {
+                    if (method && "function" != typeof method && !method.call) throw new Error("Promise.try expected a function");
                     var result = void 0;
                     try {
                         result = method.apply(context, args || []);
@@ -8653,7 +8555,7 @@
                 defaultContext: "iframe",
                 contexts: {
                     iframe: !0,
-                    popup: !1
+                    popup: !0
                 },
                 prerenderTemplate: function(_ref2) {
                     var jsxDom = _ref2.jsxDom, props = _ref2.props;
@@ -8671,9 +8573,9 @@
                 return jsxDom("div", {
                     id: id,
                     class: CLASS.XCOMPONENT + " " + CLASS.XCOMPONENT + "-tag-" + tag + " " + CLASS.XCOMPONENT + "-context-" + context
-                }, jsxDom("style", null, "\n                    #" + id + ", #" + id + " > ." + CLASS.OUTLET + " {\n                        transition: height 0.5s ease-in-out;\n                    }\n\n                    #" + id + " > ." + CLASS.OUTLET + " {\n                        display: inline-block;\n                        max-width: 500px;\n                        min-width: 150px;\n                        width: " + ("responsive" === props.style.size ? "100%" : width) + ";\n                        height: " + height + ";\n                        display: inline-block;\n                        position: relative;\n                        transition: height 0.5s ease-in-out;\n                    }\n\n                    #" + id + " > ." + CLASS.OUTLET + " > iframe {\n                        height: 100%;\n                        width: 100%;\n                        position: absolute;\n                        top: 0;\n                        left: 0;\n                        transition: opacity .2s ease-in-out;\n                    }\n\n                    #" + id + " > ." + CLASS.OUTLET + " > iframe." + CLASS.VISIBLE + " {\n                        opacity: 1;\n                    }\n\n                    #" + id + " > ." + CLASS.OUTLET + " > iframe." + CLASS.INVISIBLE + " {\n                        opacity: 0;\n                    }\n\n                    #" + id + " #paypal-button {\n                        margin-top: 10px;\n                        border-top: 1px solid #eeee;\n                        padding-top: 15px;\n                    }\n                "), outlet, props.payment.paypal_email && jsxDom("div", {
+                }, jsxDom("style", null, "\n                    #" + id + ", #" + id + " > ." + CLASS.OUTLET + " {\n                        transition: height 0.5s ease-in-out;\n                    }\n\n                    #" + id + " > ." + CLASS.OUTLET + " {\n                        display: inline-block;\n                        max-width: 500px;\n                        min-width: 150px;\n                        width: " + ("responsive" === props.style.size ? "100%" : width) + ";\n                        height: " + height + ";\n                        display: inline-block;\n                        position: relative;\n                        transition: height 0.5s ease-in-out;\n                    }\n\n                    #" + id + " > ." + CLASS.OUTLET + " > iframe {\n                        height: 100%;\n                        width: 100%;\n                        position: absolute;\n                        top: 0;\n                        left: 0;\n                        transition: opacity .2s ease-in-out;\n                    }\n\n                    #" + id + " > ." + CLASS.OUTLET + " > iframe." + CLASS.VISIBLE + " {\n                        opacity: 1;\n                    }\n\n                    #" + id + " > ." + CLASS.OUTLET + " > iframe." + CLASS.INVISIBLE + " {\n                        opacity: 0;\n                    }\n\n                    #" + id + " #paypal-button {\n                        margin-top: 10px;\n                        border-top: 1px solid #eeee;\n                        padding-top: 15px;\n                        width: " + ("responsive" === props.style.size ? "100%" : width) + ";\n                    }\n                "), outlet, props.payment.paypal_email ? jsxDom("div", {
                     id: "paypal-button"
-                }));
+                }) : jsxDom("span", null));
             }
             __webpack_exports__.a = containerTemplate;
         },
@@ -8747,6 +8649,10 @@
             __webpack_require__.d(__webpack_exports__, "buttonTemplate", function() {
                 return __WEBPACK_IMPORTED_MODULE_1__button__.b;
             });
+            var __WEBPACK_IMPORTED_MODULE_2__nanowallet__ = __webpack_require__("./src/nanowallet/index.js");
+            __webpack_require__.d(__webpack_exports__, "NanoWallet", function() {
+                return __WEBPACK_IMPORTED_MODULE_2__nanowallet__.a;
+            });
             __webpack_require__("./src/logs.js");
         },
         "./src/logs.js": function(module, __webpack_exports__, __webpack_require__) {
@@ -8755,6 +8661,71 @@
             __WEBPACK_IMPORTED_MODULE_0_beaver_logger_client__.a.logLevel = "warn";
             __WEBPACK_IMPORTED_MODULE_1_post_robot_src__.CONFIG.LOG_LEVEL = "warn";
             window.LOG_LEVEL = "warn";
+        },
+        "./src/nanowallet/component.jsx": function(module, __webpack_exports__, __webpack_require__) {
+            "use strict";
+            __webpack_require__.d(__webpack_exports__, "a", function() {
+                return NanoWallet;
+            });
+            var __WEBPACK_IMPORTED_MODULE_1_xcomponent_src__ = (__webpack_require__("./node_modules/zalgo-promise/src/index.js"), 
+            __webpack_require__("./node_modules/xcomponent/src/index.js")), __WEBPACK_IMPORTED_MODULE_2__container__ = __webpack_require__("./src/nanowallet/container.jsx"), NanoWallet = Object(__WEBPACK_IMPORTED_MODULE_1_xcomponent_src__.a)({
+                tag: "nanowallet-checkout",
+                defaultEnv: "production",
+                url: {
+                    test: "/base/test/windows/nanowallet/index.htm",
+                    local: "https://pay.nanowallet.io/bb",
+                    production: "https://pay.nanowallet.io/bb"
+                },
+                dimensions: {
+                    width: "600px",
+                    height: "700px"
+                },
+                domain: {
+                    test: "mock://www.my-site.com",
+                    local: "https://pay.nanowallet.io/",
+                    production: "https://pay.nanowallet.io/"
+                },
+                props: {
+                    token: {
+                        type: "string",
+                        queryParam: !0,
+                        required: !0
+                    },
+                    onComplete: {
+                        type: "function",
+                        required: !0
+                    }
+                },
+                defaultContext: "popup",
+                contexts: {
+                    iframe: !1,
+                    popup: !0
+                },
+                containerTemplate: __WEBPACK_IMPORTED_MODULE_2__container__.a
+            });
+        },
+        "./src/nanowallet/container.jsx": function(module, __webpack_exports__, __webpack_require__) {
+            "use strict";
+            function containerTemplate(_ref) {
+                var id = _ref.id, tag = _ref.tag, context = _ref.context, CLASS = _ref.CLASS, outlet = _ref.outlet, actions = _ref.actions, jsxDom = _ref.jsxDom;
+                return jsxDom("div", {
+                    id: id,
+                    onClick: function(event) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                        return actions.focus();
+                    },
+                    class: CLASS.XCOMPONENT + " " + CLASS.XCOMPONENT + "-tag-" + tag + " " + CLASS.XCOMPONENT + "-context-" + context + " " + CLASS.XCOMPONENT + "-focus"
+                }, outlet, jsxDom("style", null, "\n                    #" + id + " {\n                        position: fixed;\n                        top: 0;\n                        left: 0;\n                        width: 100%;\n                        height: 100%;\n                        background-color: rgba(0, 0, 0, 0.8);\n                    }\n                    #" + id + " {\n                        cursor: pointer;\n                    }\n                    #" + id + " ." + CLASS.XCOMPONENT + "-close:hover {\n                        opacity: 1;\n                    }\n                    #" + id + " ." + CLASS.XCOMPONENT + "-close:before,\n                    #" + id + " ." + CLASS.XCOMPONENT + "-close:after {\n                        position: absolute;\n                        left: 8px;\n                        content: ' ';\n                        height: 16px;\n                        width: 2px;\n                        background-color: white;\n                    }\n                    #" + id + " ." + CLASS.XCOMPONENT + "-close:before {\n                        transform: rotate(45deg);\n                    }\n                    #" + id + " ." + CLASS.XCOMPONENT + "-close:after {\n                        transform: rotate(-45deg);\n                    }\n                "));
+            }
+            __webpack_exports__.a = containerTemplate;
+        },
+        "./src/nanowallet/index.js": function(module, __webpack_exports__, __webpack_require__) {
+            "use strict";
+            var __WEBPACK_IMPORTED_MODULE_0__component__ = __webpack_require__("./src/nanowallet/component.jsx");
+            __webpack_require__.d(__webpack_exports__, "a", function() {
+                return __WEBPACK_IMPORTED_MODULE_0__component__.a;
+            });
         }
     });
 });
