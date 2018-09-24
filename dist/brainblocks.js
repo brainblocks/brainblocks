@@ -8678,7 +8678,7 @@
                 },
                 dimensions: {
                     width: "600px",
-                    height: "700px"
+                    height: "800px"
                 },
                 domain: {
                     test: "mock://www.my-site.com",

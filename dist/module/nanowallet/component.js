@@ -20,7 +20,7 @@ export var NanoWallet = create({
 
     dimensions: {
         width: '600px',
-        height: '700px'
+        height: '800px'
     },
 
     domain: {
