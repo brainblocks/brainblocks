@@ -25,8 +25,8 @@ export let NanoWallet = create({
 
     domain: {
         test:       'mock://www.my-site.com',
-        local:      'https://pay.nanowallet.io/',
-        production: 'https://pay.nanowallet.io/'
+        local:      'https://pay.nanowallet.io',
+        production: 'https://pay.nanowallet.io'
     },
 
     props: {
