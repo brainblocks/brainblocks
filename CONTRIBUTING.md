@@ -9,13 +9,13 @@ your changes into our code. Ideas and other comments are also welcome.
 1. Create your own [fork](https://help.github.com/articles/fork-a-repo) of this [repository](../../fork).
 ```bash
 # Clone it
-$ git clone git@github.com:krakenjs/xcomponent-demo.git
+$ git clone git@github.com:brainblocks/brainblocks.git
 
 # Change directory
 $ cd xcomponent-demo
 
 # Add the upstream repo
-$ git remote add upstream git://github.com/krakenjs/xcomponent-demo.git
+$ git remote add upstream git://github.com/brainblocks/brainblocks.git
 
 # Get the latest upstream changes
 $ git pull upstream
