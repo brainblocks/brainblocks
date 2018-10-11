@@ -35,10 +35,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/krakenjs/xcomponent-demo.git"
+    "url": "git://github.com/brainblocks/brainblocks.git"
   },
   "keywords": [
-    "template"
+    "brainblocks", "nano", "crypto", "payment"
   ],
   "licenses": [
     {

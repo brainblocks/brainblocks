@@ -47,3 +47,32 @@ Simple nano checkout
     "sender": "nano_1jnat..."
 }
 ```
+
+## Installation
+
+### Node module
+
+```bash
+# npm
+npm install --save brainblocks
+
+# yarn
+yarn add brainblocks
+```
+
+```js
+import * as brainblocks from 'brainblocks'
+```
+
+### Browser
+
+```html
+<!-- From Brainblocks -->
+<script src="https://brainblocks.io/brainblocks.js"></script>
+
+<!-- From CDN -->
+<script src="https://unpkg.com/brainblocks"></script>
+
+<!-- Local file -->
+<script src="brainblocks/dist/brainblocks.js"></script>
+```
