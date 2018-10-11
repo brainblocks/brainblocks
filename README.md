@@ -1,8 +1,5 @@
-![logo](./img/brainblocks-logo.png)
+![logo](./img/brainblocks_logotype.png)
 
-https://brainblocks.io
-
-Simple nano checkout
 
 ```
 <div id="nano-button"></div>
