@@ -159,5 +159,6 @@ export const SUPPORTED_CURRENCIES = [
     'zmw',
     'zwl',
     'xag',
-    'xau'
+    'xau',
+    'raw'
 ];
