@@ -1,6 +1,6 @@
 {
   "name": "brainblocks",
-  "version": "1.0.16",
+  "version": "1.0.17",
   "description": "Javascript module template.",
   "main": "dist/brainblocks.js",
   "module": "dist/brainblocks.js",
@@ -38,7 +38,10 @@
     "url": "git://github.com/brainblocks/brainblocks.git"
   },
   "keywords": [
-    "brainblocks", "nano", "crypto", "payment"
+    "brainblocks",
+    "nano",
+    "crypto",
+    "payment"
   ],
   "licenses": [
     {
