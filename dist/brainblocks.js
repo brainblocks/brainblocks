@@ -705,11 +705,11 @@
         "./node_modules/cross-domain-safe-weakmap/src/native.js": function(module, __webpack_exports__, __webpack_require__) {
             "use strict";
             function hasNativeWeakMap() {
-                if (!window.WeakMap) return !1;
-                if (!window.Object.freeze) return !1;
+                if ("undefined" == typeof WeakMap) return !1;
+                if (void 0 === Object.freeze) return !1;
                 try {
-                    var testWeakMap = new window.WeakMap(), testKey = {};
-                    window.Object.freeze(testKey);
+                    var testWeakMap = new WeakMap(), testKey = {};
+                    Object.freeze(testKey);
                     testWeakMap.set(testKey, "__testvalue__");
                     return "__testvalue__" === testWeakMap.get(testKey);
                 } catch (err) {
@@ -744,7 +744,7 @@
                     counter += 1;
                     this.name = "__weakmap_" + (1e9 * Math.random() >>> 0) + "__" + counter;
                     if (Object(__WEBPACK_IMPORTED_MODULE_1__native__.a)()) try {
-                        this.weakmap = new window.WeakMap();
+                        this.weakmap = new WeakMap();
                     } catch (err) {}
                     this.keys = [];
                     this.values = [];
@@ -846,6 +846,12 @@
                     }
                     this._cleanupClosedWindows();
                     return -1 !== Object(__WEBPACK_IMPORTED_MODULE_2__util__.b)(this.keys, key);
+                };
+                CrossDomainSafeWeakMap.prototype.getOrSet = function(key, getter) {
+                    if (this.has(key)) return this.get(key);
+                    var value = getter();
+                    this.set(key, value);
+                    return value;
                 };
                 return CrossDomainSafeWeakMap;
             }();
@@ -1139,7 +1145,7 @@
                 if (!frame.contentWindow) return !0;
                 if (!frame.parentNode) return !0;
                 var doc = frame.ownerDocument;
-                return !(!doc || !doc.body || doc.body.contains(frame));
+                return !(!doc || !doc.documentElement || doc.documentElement.contains(frame));
             }
             function safeIndexOf(collection, item) {
                 for (var i = 0; i < collection.length; i++) try {
@@ -6232,6 +6238,9 @@
                         });
                     });
                 })).then(function() {
+                    Object.keys(params).forEach(function(key) {
+                        params[key] = escape(params[key]);
+                    });
                     return params;
                 });
             }
@@ -6798,6 +6807,9 @@
                         },
                         componentDidUpdate: function() {
                             this.state && this.state.parent && this.state.parent.updateProps(Object(__WEBPACK_IMPORTED_MODULE_0__lib__.t)({}, this.props));
+                        },
+                        componentWillUnmount: function() {
+                            this.state && this.state.parent && this.state.parent.destroy();
                         }
                     }) : component.react = function(_React$Component) {
                         function _class() {
@@ -6818,6 +6830,9 @@
                         };
                         _class.prototype.componentDidUpdate = function() {
                             this.state && this.state.parent && this.state.parent.updateProps(Object(__WEBPACK_IMPORTED_MODULE_0__lib__.t)({}, this.props));
+                        };
+                        _class.prototype.componentWillUnmount = function() {
+                            this.state && this.state.parent && this.state.parent.destroy();
                         };
                         return _class;
                     }(React.Component);
@@ -8631,7 +8646,7 @@
             __webpack_require__.d(__webpack_exports__, "a", function() {
                 return SUPPORTED_CURRENCIES;
             });
-            var SUPPORTED_CURRENCIES = [ "btc", "bch", "usd", "eur", "gbp", "jpy", "cad", "aud", "cny", "chf", "sek", "nzd", "krw", "aed", "afn", "all", "amd", "ang", "aoa", "ars", "awg", "azn", "bam", "bbd", "bdt", "bgn", "bhd", "bif", "bmd", "bnd", "bob", "brl", "bsd", "btn", "bwp", "bzd", "cdf", "clf", "clp", "cop", "crc", "cup", "cve", "czk", "djf", "dkk", "dop", "dzd", "egp", "etb", "fjd", "fkp", "gel", "ghs", "gip", "gmd", "gnf", "gtq", "gyd", "hkd", "hnl", "hrk", "htg", "huf", "idr", "ils", "inr", "iqd", "irr", "isk", "jep", "jmd", "jod", "kes", "kgs", "khr", "kmf", "kpw", "kwd", "kyd", "kzt", "lak", "lbp", "lkr", "lrd", "lsl", "lyd", "mad", "mdl", "mga", "mkd", "mmk", "mnt", "mop", "mru", "mur", "mvr", "mwk", "mxn", "myr", "mzn", "nad", "ngn", "nio", "nok", "npr", "omr", "pab", "pen", "pgk", "php", "pkr", "pln", "pyg", "qar", "ron", "rsd", "rub", "rwf", "sar", "sbd", "scr", "sdg", "sgd", "shp", "sll", "sos", "srd", "stn", "svc", "syp", "szl", "thb", "tjs", "tmt", "tnd", "top", "try", "ttd", "twd", "tzs", "uah", "ugx", "uyu", "uzs", "vef", "vnd", "vuv", "wst", "xaf", "xcd", "xof", "xpf", "yer", "zar", "zmw", "zwl", "xag", "xau" ];
+            var SUPPORTED_CURRENCIES = [ "btc", "bch", "usd", "eur", "gbp", "jpy", "cad", "aud", "cny", "chf", "sek", "nzd", "krw", "aed", "afn", "all", "amd", "ang", "aoa", "ars", "awg", "azn", "bam", "bbd", "bdt", "bgn", "bhd", "bif", "bmd", "bnd", "bob", "brl", "bsd", "btn", "bwp", "bzd", "cdf", "clf", "clp", "cop", "crc", "cup", "cve", "czk", "djf", "dkk", "dop", "dzd", "egp", "etb", "fjd", "fkp", "gel", "ghs", "gip", "gmd", "gnf", "gtq", "gyd", "hkd", "hnl", "hrk", "htg", "huf", "idr", "ils", "inr", "iqd", "irr", "isk", "jep", "jmd", "jod", "kes", "kgs", "khr", "kmf", "kpw", "kwd", "kyd", "kzt", "lak", "lbp", "lkr", "lrd", "lsl", "lyd", "mad", "mdl", "mga", "mkd", "mmk", "mnt", "mop", "mru", "mur", "mvr", "mwk", "mxn", "myr", "mzn", "nad", "ngn", "nio", "nok", "npr", "omr", "pab", "pen", "pgk", "php", "pkr", "pln", "pyg", "qar", "ron", "rsd", "rub", "rwf", "sar", "sbd", "scr", "sdg", "sgd", "shp", "sll", "sos", "srd", "stn", "svc", "syp", "szl", "thb", "tjs", "tmt", "tnd", "top", "try", "ttd", "twd", "tzs", "uah", "ugx", "uyu", "uzs", "vef", "vnd", "vuv", "wst", "xaf", "xcd", "xof", "xpf", "yer", "zar", "zmw", "zwl", "xag", "xau", "raw" ];
         },
         "./src/index.js": function(module, __webpack_exports__, __webpack_require__) {
             "use strict";
