@@ -4,98 +4,32 @@
 import { jsxDom } from 'xcomponent/src/lib';
 
 export function buttonTemplate({ props } : { props : Object }) : HTMLElement {
-
-    let currency = '';
-    let amount = '';
-    
-    if (props.payment.currency === 'rai') {
-
-        function hasRai(num) {
-            num = parseInt(num) / 1000;
-            return num > Math.floor(num)
-        }
-
-        amount = hasRai(props.payment.amount)
-            ? (parseInt(props.payment.amount) / 1000000).toFixed(6)
-            : (parseInt(props.payment.amount) / 1000000).toFixed(3);
-    }
     return (
         <div class="brainblocks-button-container">
             <style>
                 {`
                     .brainblocks-button {
-                        display: inline-block;
                         width: 100%;
                         height: 50px;
-                        background-color: #eee;
-                        border-radius: 20px;
-                        font-family: Helvetica, Arial, sans-serif;
                         line-height: 50px;
-                        color: #1A3238;
+                        color: #1A2D58;
+                        background-color: #1A2D58;
                         cursor: pointer;
-                        font-size: 16px;
-                        text-align: center;
-                        letter-spacing: 1px;
                     }
-                    
-                    .brainblocks-button-content {
-                        width: 100%;
-                        height: 50px;
-                        display: flex;
-                        flex-direction: row;
-                        justify-content: center;
-                        align-items: center;
-                    }
-
-                    .brainblocks-button .nano-logo {
-                        height: 20px;
-                        float: left;
-                        padding-right: 15px;
-                        border-right: 2px solid #ccc;
-                    }
-
-                    .brainblocks-button .pay-text {
-                        margin-left: 15px;
-                    }
-
-                    .brainblocks-button .pay-amount {
-                        font-weight: bold;
-                    }
-
-                    .brainblocks-button .pay-currency {
-                        font-weight: bold;
-                    }
-
-                    @media screen and (max-width: 299px) {
-                        .brainblocks-button .pay-text {
-                            display: none;
-                        }
-                    }
-
-                    @media screen and (max-width: 200px) {
-                        .brainblocks-button .brainblocks-raiblocks-logo {
-                            display: none;
-                        }
-
-                        .brainblocks-button .brainblocks-raiblocks-logo-small {
-                            display: inline-block;
-                        }
+                    .brainblocks-logo {
+                        height: 25px;
+                        display: block;
+                        margin-left: auto;
+                        margin-right: auto;
+                        position: relative;
+                        top: 50%;
+                        transform: translateY(-50%);
                     }
                 `}
             </style>
             
             <div role="button" class="brainblocks-button">
-                <div class="brainblocks-button-content">
-                    <img class="nano-logo" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjxzdmcgaWQ9IkxheWVyXzEiIHZpZXdCb3g9IjAgMCA2NyAyOSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4NCiAgPHN0eWxlPi5zdDB7ZmlsbDojNGE5MGUyfS5zdDF7ZmlsbDojMDAwMDM0fTwvc3R5bGU+DQogIDxjaXJjbGUgY2xhc3M9InN0MCIgY3g9IjQuOCIgY3k9IjI0LjQiIHI9IjQuOCIvPg0KICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNNjIgLjZjLTIuNiAwLTQuOCAyLjEtNC44IDQuOCAwIDMuOC0uNiA0LjgtNC44IDQuOEg1MmMtMi40LjItNC4zIDIuMi00LjMgNC43di4xYzAgMy43LS43IDQuNi00LjggNC42LS4yIDAtLjQgMC0uNS4xLTIuNC4zLTQuMyAyLjMtNC4zIDQuNyAwIDIuNiAyLjEgNC44IDQuOCA0LjggMi41IDAgNC42LTIgNC43LTQuNHYtLjRjMC0zLjQgMS4xLTQuNyA0LjctNC44aC4xYzIuNSAwIDQuNi0yIDQuNy00LjV2LS4zYzAtMy41IDEuMS00LjggNC44LTQuOCAyLjYgMCA0LjgtMi4xIDQuOC00LjggMC0yLjUtMi4xLTQuNi00LjctNC42ek0zMy44IDEwLjJoLS40Yy00LjIgMC00LjgtMS00LjgtNC44IDAtMi42LTIuMS00LjgtNC44LTQuOEMyMS4yLjYgMTkgMi43IDE5IDUuNGMwIDMuOC0uNiA0LjctNC44IDQuN2gtLjRjLTIuNC4yLTQuMyAyLjItNC4zIDQuNyAwIDIuNiAyLjEgNC44IDQuOCA0LjggMi41IDAgNC42LTIgNC43LTQuNHYtLjNjMC0zLjUgMS4xLTQuOCA0LjgtNC44IDMuNyAwIDQuOCAxLjMgNC44IDQuNyAwIDIuNiAyLjEgNC44IDQuOCA0LjhzNC44LTIuMSA0LjgtNC44Yy0uMS0yLjQtMi00LjQtNC40LTQuNnoiLz4NCjwvc3ZnPg==" />
-                    <span>
-                        <span class="pay-text">{ amount && 'Pay ' }</span>
-                        <span>
-                            <span id="pay-amount" class="pay-amount">{ amount || <img class="loading-spinner" src="data:image/svg+xml;base64,PHN2ZyB4bWxuczpzdmc9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjAiIHdpZHRoPSIyNXB4IiBoZWlnaHQ9IjI1cHgiIHZpZXdCb3g9IjAgMCAxMjggMTI4IiB4bWw6c3BhY2U9InByZXNlcnZlIj48Zz48cGF0aCBkPSJNNzguNzUgMTYuMThWMS41NmE2NC4xIDY0LjEgMCAwIDEgNDcuNyA0Ny43SDExMS44YTQ5Ljk4IDQ5Ljk4IDAgMCAwLTMzLjA3LTMzLjA4ek0xNi40MyA0OS4yNUgxLjhhNjQuMSA2NC4xIDAgMCAxIDQ3LjctNDcuN1YxNi4yYTQ5Ljk4IDQ5Ljk4IDAgMCAwLTMzLjA3IDMzLjA3em0zMy4wNyA2Mi4zMnYxNC42MkE2NC4xIDY0LjEgMCAwIDEgMS44IDc4LjVoMTQuNjNhNDkuOTggNDkuOTggMCAwIDAgMzMuMDcgMzMuMDd6bTYyLjMyLTMzLjA3aDE0LjYyYTY0LjEgNjQuMSAwIDAgMS00Ny43IDQ3Ljd2LTE0LjYzYTQ5Ljk4IDQ5Ljk4IDAgMCAwIDMzLjA4LTMzLjA3eiIgZmlsbD0iIzgxY2RmMSIgZmlsbC1vcGFjaXR5PSIxIi8+PGFuaW1hdGVUcmFuc2Zvcm0gYXR0cmlidXRlTmFtZT0idHJhbnNmb3JtIiB0eXBlPSJyb3RhdGUiIGZyb209Ii05MCA2NCA2NCIgdG89IjAgNjQgNjQiIGR1cj0iNDAwbXMiIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIj48L2FuaW1hdGVUcmFuc2Zvcm0+PC9nPjwvc3ZnPg==" /> }</span>
-                            <span> </span>
-                            <span id="pay-currency" class="pay-currency">NANO</span>
-                        </span>
-                    </span>
-                </div>
+                <img class="brainblocks-logo" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgMTgwMCAzMDguNiIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMTgwMCAzMDguNjsiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+LnN0MHtmaWxsOiMyNjkzQ0Y7fS5zdDF7ZmlsbDojODBDMjQxO30uc3Qye2ZpbGw6IzJEQUZFMTt9LnN0M3tmaWxsOiMzNThBOUY7fS5zdDR7ZmlsbDojNEVCNjREO30uc3Q1e2ZpbGw6IzRBQjQ5Rjt9LnN0NntmaWxsOiM3MkNFRjI7fS5zdDd7ZmlsbDojRkZGRkZGO308L3N0eWxlPjxnPjxnPjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0yMDUuNywxODBjMCwxNC4yLTExLjUsMjUuNy0yNS43LDI1LjdjMCwwLDAsMCwwLDBjLTMuNSwwLTE0LjUsMC0yMC4xLDUuNmMtNS42LDUuNi01LjYsMTYuNi01LjYsMjAuMWMwLDE0LjItMTEuNSwyNS43LTI1LjcsMjUuN2gwYy0xNC4yLDAtMjUuNy0xMS41LTI1LjctMjUuN2MwLTE0LjIsMTEuNS0yNS43LDI1LjctMjUuN2gwYzMuNSwwLDE0LjUsMCwyMC4xLTUuNmM1LjYtNS42LDUuNi0xNi42LDUuNi0yMC4xYzAtMTQuMiwxMS41LTI1LjcsMjUuNy0yNS43aDBDMTk0LjIsMTU0LjMsMjA1LjcsMTY1LjgsMjA1LjcsMTgweiIvPjxjaXJjbGUgY2xhc3M9InN0MSIgY3g9Ijc3LjIiIGN5PSIxODAiIHI9IjI1LjciLz48cGF0aCBjbGFzcz0ic3QyIiBkPSJNMzYwLjEsMTI4LjZjMCwxNC4yLTExLjUsMjUuNy0yNS43LDI1LjdoMGMtMy41LDAtMTQuNSwwLTIwLjEsNS42Yy01LjYsNS42LTUuNiwxNi42LTUuNiwyMC4xYzAsMTQuMi0xMS41LDI1LjctMjUuNywyNS43aDBjLTE0LjIsMC0yNS43LTExLjUtMjUuNy0yNS43YzAtMTQuMiwxMS41LTI1LjcsMjUuNy0yNS43aDBjMy41LDAsMTQuNSwwLDIwLjEtNS42YzUuNi01LjYsNS42LTE2LjYsNS42LTIwLjFjMC0xNC4yLDExLjUtMjUuNywyNS43LTI1LjdoMEMzNDguNiwxMDIuOSwzNjAuMSwxMTQuNCwzNjAuMSwxMjguNnoiLz48cGF0aCBjbGFzcz0ic3QzIiBkPSJNMjU3LjIsMTI4LjZjMCwxNC4yLTExLjUsMjUuNy0yNS43LDI1LjdoMGMtMTQuMiwwLTI1LjctMTEuNS0yNS43LTI1LjdjMC0xLjgsMC01LjQtMC43LTkuM2MtMC43LTMuOS0yLjEtOC00LjktMTAuOGMtNS42LTUuNi0xNi42LTUuNi0yMC4xLTUuNmgwYy0zLjUsMC0xNC41LDAtMjAuMSw1LjZjLTUuNiw1LjYtNS42LDE2LjYtNS42LDIwLjFjMCwxNC4yLTExLjUsMjUuNy0yNS43LDI1LjdoMGMtMTQuMiwwLTI1LjctMTEuNS0yNS43LTI1LjdjMC0xNC4yLDExLjUtMjUuNywyNS43LTI1LjdoMGMzLjUsMCwxNC41LDAsMjAuMS01LjZjNS42LTUuNiw1LjYtMTYuNiw1LjYtMjAuMWMwLTE0LjIsMTEuNS0yNS43LDI1LjctMjUuN2gwYzE0LjIsMCwyNS43LDExLjUsMjUuNywyNS43YzAsMS44LDAsNS40LDAuNyw5LjNjMC43LDMuOSwyLjEsOCw0LjksMTAuOGM1LjYsNS42LDE2LjYsNS42LDIwLjEsNS42aDBDMjQ1LjcsMTAyLjksMjU3LjIsMTE0LjQsMjU3LjIsMTI4LjZ6Ii8+PGNpcmNsZSBjbGFzcz0ic3Q0IiBjeD0iMjUuNyIgY3k9IjEyOC42IiByPSIyNS43Ii8+PGNpcmNsZSBjbGFzcz0ic3Q1IiBjeD0iNzcuMiIgY3k9Ijc3LjEiIHI9IjI1LjciLz48cGF0aCBjbGFzcz0ic3Q2IiBkPSJNMzA4LjYsNzcuMWMwLDE0LjItMTEuNSwyNS43LTI1LjcsMjUuN2gwYy0xNC4yLDAtMjUuNy0xMS41LTI1LjctMjUuN2MwLTEuOCwwLTUuNC0wLjctOS4yYy0wLjctMy45LTIuMS04LTQuOS0xMC44Yy01LjYtNS42LTE2LjYtNS42LTIwLjEtNS42aDBjLTE0LjIsMC0yNS43LTExLjUtMjUuNy0yNS43YzAtMTQuMiwxMS41LTI1LjcsMjUuNy0yNS43czI1LjcsMTEuNSwyNS43LDI1LjdjMCwxLjgsMCw1LjQsMC43LDkuM2MwLjcsMy45LDIuMSw4LDQuOSwxMC44YzUuNiw1LjYsMTYuNiw1LjYsMjAuMSw1LjZoMEMyOTcuMSw1MS40LDMwOC42LDYyLjksMzA4LjYsNzcuMXoiLz48Y2lyY2xlIGNsYXNzPSJzdDAiIGN4PSI3Ny4yIiBjeT0iMjgyLjkiIHI9IjI1LjciLz48L2c+PGc+PHBhdGggY2xhc3M9InN0NyIgZD0iTTYwNywxOTAuNGMwLDE5LjItOCw0OS02MSw0OWgtNjZWNzIuNmg2MGMyOC41LDAsNTcuOCwxMC44LDU3LjgsNDdjMCwxNi41LTkuMiwyNi44LTE5LjgsMzIuM0M1OTEsMTU2LjcsNjA3LDE2Ny40LDYwNywxOTAuNHogTTUxMCwxNDAuN2gzMS44YzQsMCwyNiwxLjUsMjYtMjBjMC0xOC43LTE2LTIyLTI4LjMtMjJINTEwVjE0MC43eiBNNTc3LDE4OC45YzAtMTkuOC0xOS41LTIxLjgtMzMuNS0yMS44SDUxMHY0NmgzNC41QzU2MS41LDIxMy4yLDU3NywyMDcuOSw1NzcsMTg4Ljl6Ii8+PHBhdGggY2xhc3M9InN0NyIgZD0iTTY5OC42LDExMi43djI2Yy0xNi44LDAuMy0yOCwzLTMyLjMsNC4zdjk2LjVoLTMwVjEyNS45QzYzNi4zLDEyNS45LDY2Mi44LDExMy40LDY5OC42LDExMi43eiIvPjxwYXRoIGNsYXNzPSJzdDciIGQ9Ik04MjQuMSwxNjUuN3YzMy44YzAsMjAuMy0xMy44LDQyLTUyLjUsNDJjLTM5LjUsMC01My41LTIyLTUzLjUtNDIuOGMwLTkuMiwzLjctMzkuMyw1My44LTM5LjNjNy44LDAsMTUuMywwLjgsMjIsMS43YzAtMTMuNS03LTIzLjUtMjYuNS0yMy41Yy0xNSwwLTI3LjMsMi41LTM2LjUsNi4zdi0yNC4zYzEwLjUtNC4zLDIzLjItNywzOC4zLTdDODA0LjYsMTEyLjcsODI0LjEsMTMxLjQsODI0LjEsMTY1Ljd6IE03OTQuMSwxODAuMmMtNS4yLTAuOC0xMS4yLTEuNS0xOC0xLjVjLTIwLjMsMC0yOC4zLDYtMjguMywxNi4zYzAsMTMsNy44LDIwLDIzLjUsMjBjMTYuNywwLDIyLjctNy41LDIyLjctMTlWMTgwLjJ6Ii8+PHBhdGggY2xhc3M9InN0NyIgZD0iTTg1OC45LDk3LjdWNzAuMmgzMC44djI3LjVIODU4Ljl6IE04NTkuNCwyMzkuNFYxMTQuN2gzMHYxMjQuOEg4NTkuNHoiLz48cGF0aCBjbGFzcz0ic3Q3IiBkPSJNMTA0Mi4yLDE2NC40djc1aC0yOS44di03Ny41YzAtMTEtMi4zLTIyLjgtMjkuNS0yMi44Yy04LjUsMC0xNi41LDEtMjMuMiwyLjN2OThoLTMwdi0xMTNjMS0wLjUsMjUuNS0xMy44LDU3LjMtMTMuOEMxMDIxLjcsMTEyLjcsMTA0Mi4yLDEzMS45LDEwNDIuMiwxNjQuNHoiLz48cGF0aCBjbGFzcz0ic3Q3IiBkPSJNMTIxMy41LDE5MC40YzAsMTkuMi04LDQ5LTYxLDQ5aC02NlY3Mi42aDYwYzI4LjUsMCw1Ny44LDEwLjgsNTcuOCw0N2MwLDE2LjUtOS4zLDI2LjgtMTkuOCwzMi4zQzExOTcuNSwxNTYuNywxMjEzLjUsMTY3LjQsMTIxMy41LDE5MC40eiBNMTExNi41LDE0MC43aDMxLjhjNCwwLDI2LDEuNSwyNi0yMGMwLTE4LjctMTYtMjItMjguMy0yMmgtMjkuNVYxNDAuN3ogTTExODMuNSwxODguOWMwLTE5LjgtMTkuNS0yMS44LTMzLjUtMjEuOGgtMzMuNXY0NmgzNC41QzExNjgsMjEzLjIsMTE4My41LDIwNy45LDExODMuNSwxODguOXoiLz48cGF0aCBjbGFzcz0ic3Q3IiBkPSJNMTI0OC4xLDIzOS40VjY3LjFoMzB2MTcyLjNIMTI0OC4xeiIvPjxwYXRoIGNsYXNzPSJzdDciIGQ9Ik0xNDI5LjQsMTc3LjJjMCw0MS41LTIxLDY0LjMtNTksNjQuM2MtMzgsMC01OS0yMi44LTU5LTY0LjNzMjEtNjQuMyw1OS02NC4zQzE0MDguMywxMTIuOSwxNDI5LjQsMTM1LjcsMTQyOS40LDE3Ny4yeiBNMTM5OS4zLDE3Ny4yYzAtMzMtMTEuMy0zOS41LTI5LTM5LjVjLTE3LjgsMC0yOSw2LjUtMjksMzkuNWMwLDMzLDExLjIsMzkuNSwyOSwzOS41QzEzODguMSwyMTYuNywxMzk5LjMsMjEwLjIsMTM5OS4zLDE3Ny4yeiIvPjxwYXRoIGNsYXNzPSJzdDciIGQ9Ik0xNTE3LjQsMjE1LjdjMTEuNSwwLDIxLjgtMi41LDMxLTYuM3YyNWMtMTAuNyw0LjItMjIuNyw3LTM2LDdjLTM4LDAtNTktMjIuOC01OS02NC4zczIxLTY0LjUsNTktNjQuNWMxMy4zLDAsMjUuMywyLjgsMzYsN3YyNWMtOS4yLTMuNy0xOS41LTYtMzEtNmMtMjEsMC0zNCw2LjMtMzQsMzguNUMxNDgzLjQsMjA5LjIsMTQ5Ni40LDIxNS43LDE1MTcuNCwyMTUuN3oiLz48cGF0aCBjbGFzcz0ic3Q3IiBkPSJNMTY1NS43LDIzOS40bC00MS4zLTQ5LjNsLTguMyw4LjV2NDAuOGgtMzBWNjcuOWgzMHY5Mi41bDQyLTQ1LjhoMzkuOGwtNTQuMyw1NS41bDYwLDY5LjNIMTY1NS43eiIvPjxwYXRoIGNsYXNzPSJzdDciIGQ9Ik0xODAwLDIwNC45YzAsMjAuOC0xOCwzNi41LTQ2LjUsMzYuNWMtMTUuOCwwLTI5LTQuMy0zOS41LTEwLjN2LTI2LjhjOSw2LDIxLDExLDM1LjMsMTFjMTkuMywwLDIwLjgtNS4yLDIwLjgtMTJjMC0yMC41LTU5LjUtOC41LTU5LjUtNTEuOGMwLTI2LjMsMjEuNS0zOSw0Ni4zLTM5YzEzLDAsMjQuNSwzLjUsMzQsOXYyMi43Yy03LjUtMy41LTE3LTYtMjguOC02Yy0xMi41LDAtMjEuNSwyLjUtMjEuNSwxMC41QzE3NDAuNSwxNjguMiwxODAwLDE1My45LDE4MDAsMjA0Ljl6Ii8+PC9nPjwvZz48L3N2Zz4="/>
             </div>
         </div>
     );
