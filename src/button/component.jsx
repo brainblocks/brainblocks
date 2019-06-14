@@ -18,7 +18,7 @@ export let Button = create({
     url: {
         test:       '/base/test/windows/button/index.htm',
         local:      'http://localhost:8000/button',
-        production: 'https://brainblocks.io/button'
+        production: 'https://brainblocks.io/button.htm'
     },
 
     dimensions: {
